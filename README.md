@@ -1,7 +1,7 @@
-<h1 align="center">Dra. Helena Bellini — Medicina Estética Avançada</h1>
+<h1 align="center">Clinic Landing</h1>
 
 <p align="center">
-  Landing page institucional para uma clínica de medicina estética.<br>
+  Landing page conceito para uma clínica de medicina estética.<br>
   Design editorial de luxo, responsivo, acessível e com segurança de nível profissional.
 </p>
 
@@ -17,7 +17,7 @@
 
 ## 🔗 Demo
 
-**[helena-bellini.vercel.app](https://helena-bellini.vercel.app)** &nbsp;·&nbsp; _(atualize com a URL real após o deploy)_
+**[clinic-landing.vercel.app](https://clinic-landing.vercel.app)** &nbsp;·&nbsp; _(atualize com a URL real após o deploy)_
 
 ## ✨ Funcionalidades
 
