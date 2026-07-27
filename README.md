@@ -17,7 +17,7 @@
 
 ## 🔗 Demo
 
-**[clinic-landing.vercel.app](https://clinic-landing.vercel.app)** &nbsp;·&nbsp; _(atualize com a URL real após o deploy)_
+**[aesthetic-clinic-landing.vercel.app](https://aesthetic-clinic-landing.vercel.app)**
 
 ## ✨ Funcionalidades
 
