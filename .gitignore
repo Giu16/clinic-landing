@@ -1,0 +1,6 @@
+# Lixo de sistema operacional / editor
+.DS_Store
+Thumbs.db
+
+# Config local de ferramentas (não compartilhada)
+.claude/settings.local.json

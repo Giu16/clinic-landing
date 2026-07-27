@@ -1,0 +1,168 @@
+/* ═══════════════════════════════════════
+   UTILITIES
+═══════════════════════════════════════ */
+html {
+    /* Para a rolagem logo abaixo do header fixo, sem cortar o topo da seção */
+    scroll-padding-top: var(--nav-h);
+}
+
+h1,
+h2,
+h3,
+.logo-name {
+    font-family: var(--font-display);
+}
+
+.container {
+    width: 100%;
+    max-width: var(--container);
+    margin-inline: auto;
+    padding-inline: var(--sp-6);
+}
+
+.label {
+    font-size: var(--sz-xs);
+    font-weight: 600;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    color: var(--gold);
+}
+
+.eyebrow {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-4);
+}
+
+.eyebrow::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--gold);
+    flex-shrink: 0;
+    /* #2 — o traço "se desenha" quando a seção entra na tela */
+    transform-origin: left;
+    transition: transform .7s ease;
+}
+
+.reveal:not(.in) .eyebrow::before {
+    transform: scaleX(0);
+}
+
+.section-title {
+    font-family: var(--font-display);
+    font-size: clamp(var(--sz-3xl), 4vw, var(--sz-5xl));
+    font-weight: 300;
+    color: var(--ink);
+    line-height: 1.1;
+    text-wrap: balance;
+    letter-spacing: -.015em;
+    margin-bottom: var(--sp-6);
+}
+
+.section-title em {
+    font-style: normal;
+    color: var(--gold);
+}
+
+.section-body {
+    font-size: var(--sz-lg);
+    color: var(--text-muted);
+    line-height: 1.72;
+    margin-bottom: var(--sp-6);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--sp-2);
+    padding: var(--sp-4) var(--sp-8);
+    border-radius: 0;
+    font-size: var(--sz-sm);
+    font-weight: 600;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    transition: 
+    background-color .25s ease,
+    color .25s ease,
+    border-color .25s ease,
+    transform .25s ease,
+    box-shadow .25s ease;
+    white-space: nowrap;
+}
+
+.btn-gold {
+    background: var(--gold);
+    color: #fff
+}
+
+.btn-gold:hover {
+    background: var(--teal);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(110, 75, 50, .28)
+}
+
+.hero-actions .btn-gold,
+.about-actions .btn-gold {
+    color: var(--canvas);
+}
+
+.btn-outline {
+    border: 1px solid var(--border);
+    color: #FFFFFF
+}
+
+.btn-outline:hover {
+    border-color: var(--gold);
+    color: var(--gold)
+}
+
+/* Entrance */
+.reveal {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity .65s ease, transform .65s ease
+}
+
+.reveal.in {
+    opacity: 1;
+    transform: translateY(0)
+}
+
+.d1 {
+    transition-delay: .1s
+}
+
+.d2 {
+    transition-delay: .2s
+}
+
+.d3 {
+    transition-delay: .3s
+}
+
+/* ═══════════════════════════════════════
+   #6 — Grão sutil sobre o fundo (textura premium, dark luxury).
+   Muito discreto (opacity .04). Ajuste a opacidade p/ mais/menos grão.
+═══════════════════════════════════════ */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    pointer-events: none;
+    opacity: .04;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+/* ═══════════════════════════════════════
+   #7 — Foco de teclado consistente (dourado) para acessibilidade.
+   Só aparece na navegação por teclado; mouse não muda nada.
+═══════════════════════════════════════ */
+:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+}

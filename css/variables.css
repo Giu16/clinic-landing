@@ -1,0 +1,59 @@
+/* ═══════════════════════════════════════
+   TOKENS — Light (default)
+═══════════════════════════════════════ */
+:root {
+    --ink: #F8F4EE;
+
+    --canvas: #181310;
+    --canvas-alt: #251D18;
+
+    --gold: #B88F5E;
+    --gold-light: #D6B88E;
+
+    --teal: #6B7A74;
+    --teal-light: #8A9A94;
+
+    --text: #3B3028;
+    --text-muted: #D8CFC5;
+
+    --border: #DDD2C6;
+    --white-soft: #F8F4EE;
+
+    --shadow-sm: 0 1px 3px rgba(28, 16, 8, .08);
+    --shadow-md: 0 4px 16px rgba(28, 16, 8, .10);
+    --shadow-lg: 0 12px 48px rgba(28, 16, 8, .14);
+
+    --font-display: "Cormorant Garamond", Georgia, serif;
+    --font-body: "DM Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --sz-xs: .75rem;
+    --sz-sm: .875rem;
+    --sz-base: 1rem;
+    --sz-lg: 1.125rem;
+    --sz-xl: 1.25rem;
+    --sz-2xl: 1.5rem;
+    --sz-3xl: 1.875rem;
+    --sz-4xl: 2.25rem;
+    --sz-5xl: 3rem;
+
+    --sp-1: .25rem;
+    --sp-2: .5rem;
+    --sp-3: .75rem;
+    --sp-4: 1rem;
+    --sp-5: 1.25rem;
+    --sp-6: 1.5rem;
+    --sp-8: 2rem;
+    --sp-10: 2.5rem;
+    --sp-12: 3rem;
+    --sp-16: 4rem;
+    --sp-20: 5rem;
+    --sp-24: 6rem;
+
+    --r-sm: 4px;
+    --r-md: 8px;
+    --r-lg: 16px;
+    --r-xl: 24px;
+    --r-full: 9999px;
+    --container: 1240px;
+    --nav-h: 80px;
+}

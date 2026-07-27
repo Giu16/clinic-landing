@@ -1,0 +1,252 @@
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media(max-width:1100px) {
+  .hero {
+    grid-template-columns: 1fr;
+    /* Imagem vertical só para celular/tablet — o desktop mantém a 16:9 no hero.css.
+       Troque o arquivo em assets/images/hero/dra-helena-mobile.png */
+    background-image: url('../assets/images/hero/dra-helena-mobile.webp');
+    /* ZOOM: quanto maior o %, mais perto. "cover" = sem zoom extra.
+       Ex.: 180% (pouco) · 200% (médio) · 240% (bastante). */
+    background-size: 250%;
+    /* POSIÇÃO: 1º valor = horizontal — AUMENTE o % (até 100%) para mover
+       a Helena para a ESQUERDA; diminua para a direita.
+       2º valor = vertical ("top" mantém o rosto no topo). */
+    background-position: 70% top
+  }
+
+  /* Véu na cor do site sobre a foto INTEIRA, translúcido até o fim:
+     a imagem continua aparecendo (escurecida) até o final da página, sem virar sólido.
+     O ÚLTIMO alpha (.75) controla quanto da foto aparece embaixo:
+     MENOR = foto mais visível no fim · MAIOR = mais escuro. */
+  .hero::before {
+    background:
+      linear-gradient(to bottom,
+        rgba(24, 19, 16, .88) 0%,
+        rgba(24, 19, 16, .88) 24%,
+        rgba(24, 19, 16, .88) 55%,
+        rgba(24, 19, 16, .88) 100%)
+  }
+
+  /* Texto centralizado na vertical (centro da página), alinhado à esquerda.
+     Para dar um "nudge": aumente padding-bottom p/ subir, ou padding-top p/ descer.
+     Ex.: padding: 0 var(--sp-6) var(--sp-8);  (sobe um pouco) */
+  .hero-content {
+    max-width: 100%;
+    margin: 0;
+    justify-content: center;
+    padding: 0 var(--sp-6);
+    text-align: left
+  }
+
+  /* Tag à esquerda, tracinho menor e tudo em uma linha só */
+  .hero-tag {
+    justify-content: flex-start;
+    margin-bottom: var(--sp-6)
+  }
+
+  .hero-tag::before {
+    width: 24px
+  }
+
+  .hero-tag span {
+    font-size: clamp(.55rem, 2.5vw, .7rem);
+    letter-spacing: .1em;
+    white-space: nowrap
+  }
+
+  /* Compacta o texto no mobile para revelar mais a foto no topo */
+  .hero-h1 {
+    margin-bottom: var(--sp-5)
+  }
+
+  .hero-lead {
+    font-size: var(--sz-base);
+    line-height: 1.55;
+    margin-bottom: var(--sp-8)
+  }
+
+  /* Botões empilhados, mesma largura (100%) e mesmo tamanho */
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: var(--sp-10)
+  }
+
+  .hero-actions .btn {
+    width: 100%;
+    justify-content: center
+  }
+
+  .hero-stats {
+    justify-content: start;
+    gap: var(--sp-3)
+  }
+
+  .hero-stats > div {
+    min-width: 0
+  }
+
+  .hero-stats > div + div {
+    padding-left: var(--sp-3)
+  }
+
+  /* Números maiores; labels menores. Sem quebrar linha. */
+  .stat-val {
+    font-size: clamp(1.15rem, 5.6vw, 1.6rem);
+    white-space: nowrap
+  }
+
+  .stat-lbl {
+    font-size: .56rem;
+    letter-spacing: .06em
+  }
+
+  /* Sobre a médica: 1 coluna; foto entre o título e o texto */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 0
+  }
+
+  /* Dissolve a coluna de texto p/ intercalar a foto entre o h2 e os parágrafos */
+  .about-grid > .reveal.d1 {
+    display: contents
+  }
+
+  /* Mostra a foto (estava escondida), centralizada, entre o título e o texto.
+     TAMANHO da foto: ajuste o max-width. Espaçamento: o 3º valor do margin. */
+  .about-photo-wrap {
+    display: block;
+    order: 2;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto var(--sp-8);
+  }
+
+  .about-grid .eyebrow,
+  .about-grid #about-title {
+    order: 1
+  }
+
+  .about-grid .section-body,
+  .about-grid .creds,
+  .about-grid .about-actions {
+    order: 3
+  }
+
+  /* Foto da médica no mobile: segue o padrão do site — quadrada e sem borda.
+     Esconde os cantos em L (só aparecem no desktop). */
+  .about-photo-wrap::before,
+  .about-photo-wrap::after {
+    display: none
+  }
+
+  .test-grid {
+    grid-template-columns: 1fr
+  }
+}
+
+@media(max-width:768px) {
+  :root {
+    --nav-h: 64px
+  }
+
+  .nav-links,
+  .site-header .nav-cta {
+    display: none
+  }
+
+  .hamburger {
+    display: flex
+  }
+
+  .section {
+    padding-block: var(--sp-16)
+  }
+
+  .procs-grid {
+    grid-template-columns: 1fr
+  }
+
+  .diff-row {
+    grid-template-columns: 48px 1fr;
+    gap: var(--sp-3) var(--sp-5)
+  }
+
+  .diff-desc {
+    grid-column: 1 / -1
+  }
+
+  /* Nossa Equipe: carrossel horizontal com "peek" (padrão moderno de mobile).
+     Mantém os cards do site (foto quadrada + nome serif + função dourada).
+     LARGURA do card: flex-basis 78% (menor = mais cards à mostra).
+     Reverter p/ grade: .team-grid { display:grid; grid-template-columns:repeat(2,1fr) } */
+  .team-grid {
+    display: flex;
+    gap: var(--sp-4);
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--sp-6);
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch
+  }
+
+  .team-grid::-webkit-scrollbar {
+    display: none
+  }
+
+  .team-card {
+    flex: 0 0 78%;
+    scroll-snap-align: start
+  }
+
+  .team-nav {
+    display: flex
+  }
+
+  /* Badge "frosted glass" (moderno) — mantém quadrado + identidade dark/gold.
+     A foto aparece DESFOCADA atrás do card.
+     Reverter o vidro: background: var(--canvas) e remover as 2 linhas backdrop-filter.
+     INTENSIDADE do desfoque: o blur(12px). TAMANHO: .badge-num + padding. */
+  .about-badge {
+    left: auto;
+    right: var(--sp-4);
+    bottom: var(--sp-4);
+    padding: var(--sp-2) var(--sp-3);
+    background: rgba(24, 19, 16, .5);
+    backdrop-filter: blur(12px) saturate(1.1);
+    -webkit-backdrop-filter: blur(12px) saturate(1.1);
+    border: 1px solid rgba(184, 149, 90, .45)
+  }
+
+  .badge-num {
+    font-size: var(--sz-3xl)
+  }
+
+  /* Hairline dourado separando o número do rótulo (hierarquia + toque editorial) */
+  .about-badge .badge-lbl {
+    font-size: var(--sz-xs);
+    margin-top: var(--sp-2);
+    padding-top: var(--sp-2);
+    border-top: 1px solid rgba(184, 149, 90, .3)
+  }
+
+  /* Botões da seção "Sobre": empilhados e mesma largura — igual ao hero */
+  .about-actions {
+    flex-direction: column;
+    align-items: stretch
+  }
+
+  .about-actions .btn {
+    width: 100%;
+    justify-content: center
+  }
+}
+
+@media(max-width:480px) {
+
+  .procs-grid {
+    grid-template-columns: 1fr
+  }
+}

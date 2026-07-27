@@ -1,0 +1,1010 @@
+/* ═══════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════ */
+.section {
+    padding-block: var(--sp-24)
+}
+
+.section-alt {
+    background: var(--canvas-alt)
+}
+
+/* ═══════════════════════════════════════
+   ABOUT
+═══════════════════════════════════════ */
+.about-grid {
+    display: grid;
+    grid-template-columns: 5fr 6fr;
+    gap: var(--sp-16);
+    align-items: center
+}
+
+.about-photo-wrap {
+    position: relative
+}
+
+/* Cantos editoriais em "L" — mais moderno que a moldura retangular
+   deslocada. Corners opostos: sup-esq + inf-dir. */
+.about-photo-wrap::before,
+.about-photo-wrap::after {
+    content: '';
+    position: absolute;
+    width: 78px;
+    height: 78px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.about-photo-wrap::before {
+    top: calc(var(--sp-5) * -1);
+    left: calc(var(--sp-5) * -1);
+    border-top: 1px solid rgba(184, 149, 90, .7);
+    border-left: 1px solid rgba(184, 149, 90, .7);
+}
+
+.about-photo-wrap::after {
+    bottom: calc(var(--sp-5) * -1);
+    right: calc(var(--sp-5) * -1);
+    border-bottom: 1px solid rgba(184, 149, 90, .7);
+    border-right: 1px solid rgba(184, 149, 90, .7);
+}
+
+.about-photo {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    aspect-ratio: 3/4;
+    border-radius: 0;
+    overflow: hidden;
+    background: var(--canvas-alt);
+}
+
+.about-photo-inner {
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(ellipse 60% 70% at 50% 30%, rgba(168, 126, 79, .1) 0%, rgba(110, 75, 50, .06) 55%, transparent 80%),
+        linear-gradient(170deg, var(--canvas-alt), var(--canvas));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-badge {
+    position: absolute;
+    /* Card pousado DENTRO da foto, canto inferior-esquerdo (livre dos cantos em L) */
+    bottom: var(--sp-5);
+    left: var(--sp-5);
+    right: auto;
+    /* Frosted glass (mesmo do mobile): transparente + desfoque + hairline gold */
+    background: rgba(24, 19, 16, .5);
+    backdrop-filter: blur(12px) saturate(1.1);
+    -webkit-backdrop-filter: blur(12px) saturate(1.1);
+    border: 1px solid rgba(184, 149, 90, .45);
+    border-radius: 0;
+    padding: var(--sp-2) var(--sp-3);
+    box-shadow: var(--shadow-lg);
+    text-align: center;
+    min-width: 130px;
+    z-index: 3;
+}
+
+/* Hairline dourado separando o número do rótulo (mesmo do mobile) */
+.about-badge .badge-lbl {
+    margin-top: var(--sp-2);
+    padding-top: var(--sp-2);
+    border-top: 1px solid rgba(184, 149, 90, .3);
+}
+
+.badge-num {
+    font-family: var(--font-display);
+    font-size: var(--sz-4xl);
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+}
+
+.badge-lbl {
+    font-size: .625rem;
+    color: var(--text-muted);
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-top: var(--sp-1);
+    line-height: 1.4
+}
+
+.creds {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    margin-bottom: var(--sp-8)
+}
+
+.cred-row {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--sp-3);
+    font-size: var(--sz-sm);
+    color: var(--text-muted);
+}
+
+.cred-row::before {
+    content: '';
+    width: 2px;
+    height: 1.1em;
+    background: var(--gold);
+    margin-top: .15em;
+    flex-shrink: 0;
+    border-radius: 2px;
+}
+
+.about-actions {
+    display: flex;
+    gap: var(--sp-4);
+    flex-wrap: wrap
+}
+
+/* ═══════════════════════════════════════
+   PROCEDURES
+═══════════════════════════════════════ */
+.procs-header {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--sp-10)
+}
+
+.procs-header .eyebrow {
+  justify-content: center
+}
+
+.tabs {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+  margin-bottom: var(--sp-10)
+}
+
+/* #3 — Pílula dourada que DESLIZA para a aba ativa (posição via JS).
+   A transição só liga depois do posicionamento inicial (classe .ready). */
+.tabs::before {
+  content: '';
+  position: absolute;
+  z-index: 0;
+  left: var(--tab-x, 0);
+  top: var(--tab-y, 0);
+  width: var(--tab-w, 0);
+  height: var(--tab-h, 0);
+  background: var(--gold);
+  pointer-events: none;
+}
+
+.tabs.ready::before {
+  transition: left .35s cubic-bezier(.4, 0, .2, 1), top .35s ease, width .35s ease, height .35s ease;
+}
+
+.tab {
+  position: relative;
+  z-index: 1;
+  padding: var(--sp-3) var(--sp-6);
+  border: 0.5px solid rgba(184, 149, 90, .55);
+  border-radius: 0;
+  font-size: var(--sz-sm);
+  font-weight: 500;
+  color: #fff;
+  background: transparent;
+  transition: color .25s, border-color .25s;
+  cursor: pointer;
+}
+
+.tab:hover:not(.on) {
+  color: var(--gold);
+  border-color: var(--gold)
+}
+
+.tab.on {
+  color: var(--canvas);
+  border-color: var(--gold)
+}
+
+.procs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-5)
+}
+
+.proc-card {
+  background: var(--canvas);
+  border: 0.5px solid rgba(184, 149, 90, .55);
+  border-radius: 0;
+  overflow: hidden;
+  transition: transform .3s ease, box-shadow .3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.proc-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg)
+}
+
+.proc-img {
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.proc-body {
+  padding: var(--sp-6);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.proc-tag {
+  display: block;
+  margin-bottom: var(--sp-2)
+}
+
+.proc-name {
+  font-family: var(--font-display);
+  font-size: var(--sz-xl);
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: var(--sp-2);
+}
+
+.proc-desc {
+  font-size: var(--sz-sm);
+  color: var(--text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--sp-4)
+}
+
+.proc-link {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: auto;
+  gap: var(--sp-2);
+  font-size: var(--sz-sm);
+  font-weight: 600;
+  color: var(--gold);
+  letter-spacing: .04em;
+  transition: gap .2s;
+}
+
+.proc-link::after {
+  content: '→';
+  transition: transform .2s
+}
+
+.proc-card:hover .proc-link {
+  gap: var(--sp-3)
+}
+
+.proc-card:hover .proc-link::after {
+  transform: translateX(3px)
+}
+
+/* #7 — Micro-interações de hover (só mouse/desktop):
+   zoom sutil na foto dos cards + lift nos cards da equipe.
+   Contêineres já têm overflow:hidden, então o zoom não vaza. */
+@media (hover: hover) {
+  .proc-img img,
+  .team-photo-inner img {
+    transition: transform .5s ease;
+  }
+
+  .proc-card:hover .proc-img img,
+  .team-card:hover .team-photo-inner img {
+    transform: scale(1.05);
+  }
+
+  .team-card {
+    transition: transform .3s ease;
+  }
+
+  .team-card:hover {
+    transform: translateY(-4px);
+  }
+}
+
+/* ═══════════════════════════════════════
+   DIFFERENTIALS
+═══════════════════════════════════════ */
+.diff-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.diff-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 1.8fr;
+  gap: var(--sp-8);
+  align-items: start;
+  padding-block: var(--sp-8);
+  border-top: 1px solid rgba(184, 149, 90, .45);
+}
+
+.diff-row:last-child {
+  border-bottom: 1px solid rgba(184, 149, 90, .45);
+}
+
+.diff-num {
+  font-family: var(--font-display);
+  font-size: var(--sz-4xl);
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1.25;
+  margin-top: -12.2px;
+}
+
+.diff-title {
+  font-family: var(--font-body);
+  font-size: var(--sz-xs);
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--ink);
+  line-height: 1.6;
+  margin-top: 1.8px;
+}
+
+.diff-desc {
+  font-size: var(--sz-base);
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════
+   TEAM
+═══════════════════════════════════════ */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-6)
+}
+
+.team-card {
+  text-align: center
+}
+
+.team-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  border-radius: 0;
+  overflow: hidden;
+  margin-bottom: var(--sp-4);
+  background: var(--canvas-alt);
+}
+
+.team-photo-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Fundos decorativos dos cards da equipe (antes inline; movidos p/ classes) */
+.team-grad-1 { background: linear-gradient(145deg, rgba(184,149,90,.1), rgba(46,107,110,.06), var(--canvas-alt)); }
+.team-grad-2 { background: linear-gradient(145deg, rgba(46,107,110,.08), rgba(184,149,90,.05), var(--canvas-alt)); }
+.team-grad-3 { background: linear-gradient(145deg, rgba(184,149,90,.07), rgba(46,107,110,.09), var(--canvas-alt)); }
+.team-grad-4 { background: linear-gradient(145deg, rgba(46,107,110,.06), rgba(184,149,90,.08), var(--canvas-alt)); }
+
+/* ═══════════════════════════════════════
+   ÁREAS PRONTAS PARA IMAGENS
+   Basta colocar um <img> dentro do container:
+   a foto preenche e recorta no formato certo.
+═══════════════════════════════════════ */
+.about-photo-inner,
+.team-photo-inner,
+.pd-img-inner {
+  position: relative;
+}
+
+.about-photo-inner img,
+.team-photo-inner img,
+.proc-img img,
+.pd-img-inner img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Tamanho dos SVGs placeholder (antes eram inline; movidos p/ CSP sem 'unsafe-inline') */
+.about-photo-inner svg { width: 120px; opacity: .35; }
+.team-photo-inner svg { width: 60px; opacity: .3; }
+.proc-img svg { width: 72px; opacity: .35; }
+
+.team-name {
+  font-family: var(--font-display);
+  font-size: var(--sz-lg);
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: var(--sp-1);
+}
+
+.team-role {
+  font-size: var(--sz-xs);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--gold)
+}
+
+/* Seta do carrossel da equipe — círculo (como o #btt) + anel gold (como o btn-outline).
+   Escondida por padrão; só aparece no mobile (ver responsive.css). */
+/* Wrapper que posiciona a seta sobre o carrossel */
+.team-carousel {
+  position: relative;
+}
+
+/* Seta flutuando ao lado da foto (lateral direita, na altura da foto) */
+.team-nav {
+  display: none;
+  position: absolute;
+  top: 45%;
+  right: var(--sp-2);
+  transform: translateY(-50%);
+  z-index: 2;
+}
+
+.team-next {
+  width: 48px;
+  height: 48px;
+  flex-shrink: 0;
+  border-radius: var(--r-full);
+  border: 1px solid var(--gold);
+  /* fundo glass p/ a seta ficar visível sobre qualquer foto */
+  background: rgba(24, 19, 16, .55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: var(--gold);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background .25s ease, color .25s ease, transform .25s ease;
+}
+
+.team-next:hover,
+.team-next:focus-visible {
+  background: var(--gold);
+  color: var(--canvas);
+  transform: translateX(3px);
+  outline: none;
+}
+
+.team-next svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* Nudge sutil indicando que dá pra deslizar (respeita reduce-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .team-next svg {
+    animation: teamNudge 1.9s ease-in-out infinite;
+  }
+}
+
+@keyframes teamNudge {
+  0%, 55%, 100% { transform: translateX(0); }
+  78% { transform: translateX(3px); }
+}
+
+/* ═══════════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════════ */
+.test-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-6)
+}
+
+.test-card {
+  background: var(--canvas);
+  border: 0.5px solid rgba(184, 149, 90, .55);
+  border-radius: 0;
+  padding: var(--sp-8);
+  display: flex;
+  flex-direction: column;
+}
+
+.stars {
+  display: flex;
+  gap: 3px;
+  color: var(--gold);
+  margin-bottom: var(--sp-5)
+}
+
+.stars svg {
+  width: 15px;
+  height: 15px;
+}
+
+.test-quote {
+  position: relative;
+  isolation: isolate;
+  font-size: var(--sz-base);
+  color: var(--text-muted);
+  line-height: 1.72;
+  font-style: italic;
+  margin-bottom: var(--sp-6);
+  flex: 1;
+}
+
+/* Aspa gigante em marca-d'água, atrás do texto (editorial de luxo) */
+.test-quote::before {
+  content: '\201C';
+  position: absolute;
+  z-index: -1;
+  top: -.35em;
+  left: -.25em;
+  font-family: var(--font-display);
+  font-style: normal;
+  font-size: 2.6rem;
+  line-height: 1;
+  color: var(--gold);
+  opacity: .30;
+  pointer-events: none;
+}
+
+.test-author {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3)
+}
+
+.test-avatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(168, 126, 79, .15), rgba(110, 75, 50, .1));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--sz-lg);
+  font-weight: 300;
+  color: var(--gold);
+  flex-shrink: 0;
+}
+
+.test-avatar svg {
+  width: 22px;
+  height: 22px;
+}
+
+.test-name {
+  font-size: var(--sz-sm);
+  font-weight: 600;
+  color: var(--ink)
+}
+
+.test-meta {
+  font-size: var(--sz-xs);
+  color: var(--text-muted);
+  margin-top: 2px
+}
+
+/* ═══════════════════════════════════════
+   FAQ
+═══════════════════════════════════════ */
+.faq-wrap {
+  max-width: 760px;
+  margin: 0 auto
+}
+
+.faq-item {
+  border-bottom: 0.5px solid rgba(184, 149, 90, .35)
+}
+
+.faq-q {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-6) 0;
+  font-size: var(--sz-base);
+  font-weight: 500;
+  color: var(--ink);
+  text-align: left;
+  gap: var(--sp-4);
+}
+
+.faq-icon {
+  width: 28px;
+  height: 28px;
+  border: 0.5px solid rgba(184, 149, 90, .55);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold);
+  font-size: 0;            /* esconde o "+" do HTML */
+  flex-shrink: 0;
+  transition: transform .3s, border-color .2s;
+}
+
+/* Chevron moderno (setinha) apontando para baixo */
+.faq-icon::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  margin-top: -2px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(45deg);
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(180deg);   /* gira o chevron para cima ao abrir */
+  border-color: var(--gold)
+}
+
+.faq-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows .35s ease;
+}
+
+.faq-item.open .faq-body {
+  grid-template-rows: 1fr
+}
+
+.faq-inner {
+  overflow: hidden
+}
+
+.faq-inner p {
+  padding-bottom: var(--sp-6);
+  color: var(--text-muted);
+  line-height: 1.72;
+  font-size: var(--sz-base)
+}
+
+/* ═══════════════════════════════════════
+   PROC DETAIL VIEW
+═══════════════════════════════════════ */
+#proc-detail {
+  display: none;
+  background: var(--ink);
+  min-height: 60vh;
+  padding-top: var(--nav-h);
+  --text-muted: #857668;
+}
+
+/* Info box claro */
+#proc-detail .pd-info-box {
+  background: var(--ink);
+  border-color: rgba(184, 149, 90, .55);
+  box-shadow: var(--shadow-sm);
+}
+
+#proc-detail .pd-info-title {
+  color: var(--text);
+}
+
+#proc-detail .pd-info-val {
+  color: var(--text);
+}
+
+#proc-detail .pd-info-divider {
+  background: var(--border);
+}
+
+#proc-detail .pd-duvidas-btn {
+  border-color: rgba(184, 149, 90, .55);
+  color: var(--text-muted);
+}
+
+/* Texto escuro sobre fundo claro */
+#proc-detail .pd-back-bar {
+  background: var(--canvas);
+  border-bottom-color: rgba(184, 149, 90, .55);
+  --text-muted: #D8CFC5;
+}
+
+#proc-detail .pd-title {
+  color: var(--text);
+}
+
+#proc-detail .pd-faq-title {
+  color: var(--text);
+}
+
+#proc-detail .faq-q {
+  color: var(--text);
+}
+
+#proc-detail .faq-item {
+  border-bottom-color: rgba(184, 149, 90, .35);
+}
+
+#proc-detail .pd-divider {
+  background: rgba(59,48,40,.1);
+}
+
+body.detail-open .hero,
+body.detail-open .section {
+  display: none !important;
+}
+
+body.detail-open #proc-detail {
+  display: block;
+}
+
+body.detail-open #btt {
+  display: none !important;
+}
+
+.pd-back-bar {
+  padding-block: var(--sp-6);
+  border-bottom: 0.5px solid rgba(184, 149, 90, .55);
+  background: var(--canvas);
+}
+
+.pd-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-2);
+  font-size: var(--sz-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: var(--sp-1) 0;
+  transition: color .2s;
+  letter-spacing: .03em;
+}
+
+.pd-back-btn:hover {
+  color: var(--gold);
+}
+
+.pd-container {
+  padding-block: var(--sp-12);
+}
+
+.pd-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--sp-10);
+}
+
+/* Left column */
+.pd-main {
+  min-width: 0;
+}
+
+/* Morph da imagem (card do procedimento → detalhe) via View Transitions.
+   O card recebe o mesmo nome dinamicamente no main.js ao abrir. */
+#pd-image {
+  display: none;
+  view-transition-name: proc-media;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  ::view-transition-group(proc-media) {
+    animation-duration: .45s;
+  }
+}
+
+.pd-img {
+  aspect-ratio: 16/9;
+  border-radius: 0;
+  overflow: hidden;
+  background: var(--canvas-alt);
+  margin-bottom: var(--sp-8);
+}
+
+.pd-img-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-4);
+  background: linear-gradient(145deg, rgba(184,149,90,.07) 0%, rgba(46,107,110,.04) 50%, var(--canvas-alt) 100%);
+}
+
+.pd-content {
+  padding-right: var(--sp-4);
+}
+
+.pd-title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--sz-3xl), 4vw, var(--sz-5xl));
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.1;
+  letter-spacing: -.015em;
+  margin-bottom: var(--sp-5);
+}
+
+.pd-lead {
+  border-left: 1px solid var(--gold);
+  padding-left: var(--sp-5);
+  margin: 0 0 var(--sp-6);
+  font-size: var(--sz-base);
+  color: var(--text-muted);
+  line-height: 1.72;
+  font-style: normal;
+}
+
+.pd-body {
+  font-size: var(--sz-base);
+  color: var(--text-muted);
+  line-height: 1.72;
+}
+
+/* Sidebar */
+.pd-sidebar {
+  align-self: start;
+  position: sticky;
+  top: calc(var(--nav-h) + var(--sp-6) * 2 + var(--sz-sm) * 1.6 + var(--sp-1) * 2 + 1px + var(--sp-12));
+}
+
+.pd-info-box {
+  background: var(--canvas-alt);
+  border: 0.5px solid rgba(184, 149, 90, .55);
+  border-radius: 0;
+  padding: var(--sp-6);
+}
+
+.pd-info-title {
+  font-family: var(--font-display);
+  font-size: var(--sz-xl);
+  font-weight: 400;
+  color: var(--ink);
+  margin-bottom: var(--sp-5);
+}
+
+.pd-info-row {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-3);
+}
+
+.pd-info-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: var(--r-sm);
+  background: linear-gradient(135deg, rgba(184,149,90,.14), rgba(110,75,50,.07));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  flex-shrink: 0;
+}
+
+.pd-info-icon svg {
+  width: 18px;
+  height: 18px;
+  stroke: var(--gold);
+}
+
+.pd-cta svg,
+.pd-duvidas-btn svg {
+  width: 17px;
+  height: 17px;
+  flex-shrink: 0;
+}
+
+.pd-info-label {
+  font-size: var(--sz-xs);
+  color: var(--text-muted);
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  margin-bottom: 2px;
+}
+
+.pd-info-val {
+  font-size: var(--sz-sm);
+  font-weight: 500;
+  color: var(--ink);
+}
+
+.pd-gold {
+  color: var(--gold);
+}
+
+.pd-info-divider {
+  height: 1px;
+  background: rgba(221,210,198,.18);
+  margin: var(--sp-4) 0;
+}
+
+.pd-cta {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: var(--sp-5);
+  margin-bottom: var(--sp-3);
+  text-decoration: none;
+}
+
+.pd-duvidas-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  font-size: var(--sz-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  border: 0.5px solid rgba(184, 149, 90, .55);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  transition: color .2s, border-color .2s;
+  background: transparent;
+  font-family: var(--font-body);
+  letter-spacing: .04em;
+}
+
+.pd-duvidas-btn:hover {
+  color: var(--gold);
+  border-color: var(--gold);
+}
+
+/* FAQ section */
+.pd-divider {
+  height: 1px;
+  background: rgba(221,210,198,.18);
+  margin-bottom: var(--sp-12);
+}
+
+.pd-faq-section {
+  max-width: 760px;
+}
+
+.pd-faq-header {
+  margin-bottom: var(--sp-8);
+}
+
+.pd-faq-title {
+  font-family: var(--font-display);
+  font-size: clamp(var(--sz-2xl), 3vw, var(--sz-4xl));
+  font-weight: 300;
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: -.01em;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .pd-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Box de Informações vai para o FINAL (depois do FAQ) no mobile.
+     A distância do FAQ é o gap do grid (--sp-10 = 40px). */
+  .pd-sidebar {
+    position: static;
+    order: 1;
+  }
+
+  .pd-content {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .pd-container {
+    padding-block: var(--sp-8);
+  }
+
+}
