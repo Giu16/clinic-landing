@@ -241,33 +241,20 @@ a.ft-contact-item:hover {
     0 14px 34px rgba(184, 143, 94, .45);
 }
 
-/* Brilho especular que varre a superfície (reflexo de metal premium) */
-.wa-float::after {
-  content: '';
-  position: absolute;
-  z-index: 1;
-  inset: 0;
-  border-radius: 50%;
-  background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .55) 50%, transparent 62%);
-  background-size: 250% 100%;
-  background-position: 150% 0;
-  pointer-events: none;
-}
+/* ⚠️ REMOVIDAS as animações infinitas deste botão (waGlow e waSheen) e o ::after
+   que existia só para a varredura de brilho.
 
-@media (prefers-reduced-motion: no-preference) {
-  .wa-float::before { animation: waGlow 3.4s ease-in-out infinite; }
-  .wa-float::after  { animation: waSheen 6.5s ease-in-out infinite; }
-}
+   Motivo: este botão é position:fixed, e a waSheen animava background-position —
+   propriedade NÃO acelerada por GPU. Resultado: repaint infinito na thread
+   principal de um elemento fixo, o que atrapalha o caminho de scroll assíncrono
+   do WebKit e faz elementos fixed/sticky (o .site-header) serem desenhados com
+   offset de scroll defasado — o gap no topo, só no iOS, que sumia ao girar o
+   aparelho (girar força recomposição).
 
-@keyframes waGlow {
-  0%, 100% { opacity: .82; }
-  50%      { opacity: 1; }
-}
+   Se for reintroduzir brilho aqui, anime SOMENTE transform/opacity (aceleradas
+   por GPU). NUNCA background-position, width/height, top/left ou box-shadow. */
 
-@keyframes waSheen {
-  0%, 78%, 100% { background-position: 150% 0; }
-  88%          { background-position: -150% 0; }
-}
+/* O glow estático do ::before continua: box-shadow parado não repinta nada. */
 
 #cookie-banner {
   position: fixed;
