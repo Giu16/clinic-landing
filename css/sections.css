@@ -421,6 +421,13 @@
   display: block;
 }
 
+/* Impede o arraste nativo da imagem — sem isto, ao rolar o carrossel da equipe
+   no mobile o dedo "agarra" a foto, que descola e desliza como um fantasma. */
+.team-photo-inner img {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 /* Tamanho dos SVGs placeholder (antes eram inline; movidos p/ CSP sem 'unsafe-inline') */
 .about-photo-inner svg { width: 120px; opacity: .35; }
 .team-photo-inner svg { width: 60px; opacity: .3; }
