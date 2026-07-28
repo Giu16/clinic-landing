@@ -19,7 +19,8 @@
     background: var(--canvas);
     border-bottom: 0.5px solid rgba(184, 149, 90, .55);
     box-shadow: var(--shadow-md);
-    transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
+    /* SEM transition aqui: qualquer transição neste elemento sticky pode ser
+       disparada durante a rolagem e atrapalhar a composição no Safari iOS. */
     /* NÃO usar transform/translateZ nem backface-visibility aqui: promover o
        header a camada de GPU foi uma das tentativas que PIOROU o problema.
        Também não é preciso env(safe-area-inset-*): o index.html não usa
@@ -46,11 +47,9 @@
     pointer-events: none;
 }
 
-.site-header.scrolled {
-    background: var(--canvas);
-    box-shadow: var(--shadow-md);
-    border-bottom-color: rgba(184, 149, 90, .55);
-}
+/* A regra .site-header.scrolled foi removida: tinha valores idênticos aos da
+   regra base, ou seja, não mudava nada — só servia pra ser alternada a cada
+   scroll (ver comentário em js/main.js). */
 
 .site-header .container {
     width: 100%;

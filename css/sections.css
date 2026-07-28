@@ -498,9 +498,11 @@
 
 /* Nudge sutil indicando que dá pra deslizar (respeita reduce-motion) */
 @media (prefers-reduced-motion: no-preference) {
-  .team-next svg {
+  /* ⚠️ DESATIVADA enquanto caçamos o gap no topo do header no Safari iOS —
+     última animação infinita da página. Para reativar, descomente: */
+  /* .team-next svg {
     animation: teamNudge 1.9s ease-in-out infinite;
-  }
+  } */
 }
 
 @keyframes teamNudge {

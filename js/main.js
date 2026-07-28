@@ -20,10 +20,13 @@ window.addEventListener('pageshow', e => {
 });
 
 
-/* ═══════════ Header scroll ═══════════ */
-const hdr = document.getElementById('site-header');
+/* ═══════════ Scroll ═══════════
+   NÃO voltar a mexer em classe/estilo do .site-header aqui dentro. Mutar um
+   elemento sticky/fixed durante o scroll tira ele do caminho de scroll
+   assíncrono do WebKit e faz a barra ser desenhada com offset defasado — era
+   o gap no topo no Safari iOS. A classe .scrolled era código morto: tinha
+   exatamente os mesmos valores da regra base. */
 window.addEventListener('scroll', () => {
-  hdr.classList.toggle('scrolled', scrollY > 30);
   document.getElementById('btt').classList.toggle('show', scrollY > 600);
 }, { passive: true });
 
