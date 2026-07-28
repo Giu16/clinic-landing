@@ -48,6 +48,15 @@ mNav.querySelectorAll('a').forEach(a => {
   });
 });
 
+/* Fecha o menu assim que a página começa a rolar. A guarda no início mantém o
+   handler barato: em rolagem normal (menu fechado) ele sai na primeira linha. */
+window.addEventListener('scroll', () => {
+  if (!mNav.classList.contains('open')) return;
+  mNav.classList.remove('open');
+  ham.classList.remove('open');
+  ham.setAttribute('aria-expanded', 'false');
+}, { passive: true });
+
 /* ═══════════ Seção atual em dourado (scroll-spy) — menu desktop + mobile ═══════════ */
 const spyLinks = [...document.querySelectorAll('.nav-links .nav-link, .mobile-nav .nav-link')];
 const spyTargets = [...new Set(spyLinks.map(a => a.getAttribute('href')))]
