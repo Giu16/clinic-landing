@@ -203,14 +203,17 @@ a.ft-contact-item:hover {
   color: var(--canvas);          /* ícone escuro sobre o gold */
   /* Ouro polido: luz vindo do canto superior esquerdo, aprofundando na borda */
   background: radial-gradient(circle at 32% 26%, var(--gold-light), var(--gold) 58%, #A9784A 100%);
-  border: 1px solid rgba(248, 244, 238, .22);
-  /* Camadas: gloss interno no topo + profundidade embaixo + sombra de contato + glow dourado */
+  /* Rim de luz como box-shadow inset (1º layer), não como border: no Safari iOS
+     a border em elemento redondo com sombra deixava uma "costura" cortando o glow.
+     Camadas: rim + gloss no topo + profundidade embaixo + sombra de contato + glow dourado */
   box-shadow:
+    inset 0 0 0 1px rgba(248, 244, 238, .22),
     inset 0 1px 1px rgba(255, 255, 255, .5),
     inset 0 -3px 7px rgba(24, 19, 16, .2),
     0 4px 10px rgba(24, 19, 16, .22),
     0 14px 34px rgba(184, 143, 94, .4);
   z-index: 90;
+  -webkit-backface-visibility: hidden;   /* iOS: renderiza a sombra sem emenda */
   -webkit-tap-highlight-color: transparent;
   transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease;
 }
@@ -226,6 +229,7 @@ a.ft-contact-item:hover {
 .wa-float:hover {
   transform: translateY(-2px) scale(1.05);
   box-shadow:
+    inset 0 0 0 1px rgba(248, 244, 238, .22),
     inset 0 1px 1px rgba(255, 255, 255, .5),
     inset 0 -3px 7px rgba(24, 19, 16, .2),
     0 8px 16px rgba(24, 19, 16, .24),
