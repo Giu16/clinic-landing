@@ -148,10 +148,14 @@ h3,
    #6 — Grão sutil sobre o fundo (textura premium, dark luxury).
    Muito discreto (opacity .04). Ajuste a opacidade p/ mais/menos grão.
 ═══════════════════════════════════════ */
-/* Grão sutil sobre o fundo (textura premium). Reativado após a correção do gap
-   do header — era um dos 4 suspeitos, testado isoladamente. Camada ESTÁTICA
-   (sem animação), então não repinta a cada frame. Se o gap do topo voltar no
-   Safari iOS, este é o primeiro a desativar de novo. */
+/* ❌ NÃO REATIVAR: este grão é CULPADO CONFIRMADO do gap no topo do header no
+   Safari iOS. Testado isoladamente em 2026-07-28 — ao ligar, o gap volta; ao
+   desligar, some. É um position:fixed cobrindo a viewport INTEIRA em z-index
+   9999; mesmo sem animação, desestabiliza a composição dos outros elementos
+   fixed/sticky (o .site-header) no WebKit.
+   Se um dia quiser textura de grão, tem que ser SEM position:fixed de tela
+   cheia — ex.: aplicada por seção, ou como background do próprio body (não em
+   camada fixa sobreposta). Ver memory header-translatez-descola-notch.
 body::before {
     content: '';
     position: fixed;
@@ -161,6 +165,7 @@ body::before {
     opacity: .04;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
+*/
 
 /* ═══════════════════════════════════════
    #7 — Foco de teclado consistente (dourado) para acessibilidade.
