@@ -114,6 +114,12 @@
     display: contents
   }
 
+  /* display:contents remove a caixa da .reveal.d1, então o IntersectionObserver
+     nunca marca '.in' aqui — restaura o traço do eyebrow que dependia disso */
+  .about-grid > .reveal.d1 .eyebrow::before {
+    transform: none
+  }
+
   /* Mostra a foto (estava escondida), centralizada, entre o título e o texto.
      TAMANHO da foto: ajuste o max-width. Espaçamento: o 3º valor do margin. */
   .about-photo-wrap {
