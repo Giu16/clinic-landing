@@ -2,23 +2,26 @@
    HEADER
 ═══════════════════════════════════════ */
 .site-header {
-    position: -webkit-sticky; /* Essencial para o Safari antigo/atual */
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    height: var(--nav-h);
+    height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
     padding-top: env(safe-area-inset-top, 0px);
-    z-index: 1000;
+    z-index: 100;
     display: flex;
     align-items: center;
     background: var(--canvas);
     border-bottom: 0.5px solid rgba(184, 149, 90, .55);
     box-shadow: var(--shadow-md);
     transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
-    transform: translateZ(0);
+    /* Safari iOS: promove o header à própria camada de GPU. Sem isto, o
+       position:fixed "descola" no scroll de inércia e abre um gap no topo.
+       O translateZ(0) trava a barra colada no topo (Chrome + Safari). */
     -webkit-transform: translateZ(0);
-    will-change: transform;
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
 }
 
 .site-header.scrolled {
