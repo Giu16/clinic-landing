@@ -215,6 +215,17 @@
     display: flex
   }
 
+  /* Botão flutuante de WhatsApp aparece; o "voltar ao topo" sobe e centraliza
+     sobre ele pra não colidirem no canto inferior direito. */
+  .wa-float {
+    display: inline-flex
+  }
+
+  #btt {
+    right: calc(var(--sp-6) + 6px);
+    bottom: calc(var(--sp-6) + 56px + var(--sp-3))
+  }
+
   /* Badge "frosted glass" (moderno) — mantém quadrado + identidade dark/gold.
      A foto aparece DESFOCADA atrás do card.
      Reverter o vidro: background: var(--canvas) e remover as 2 linhas backdrop-filter.
