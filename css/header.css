@@ -18,9 +18,7 @@
     /* Safari iOS: promove o header à própria camada de GPU. Sem isto, o
        position:fixed "descola" no scroll de inércia e abre um gap no topo.
        O translateZ(0) trava a barra colada no topo (Chrome + Safari). */
-    -webkit-transform: translateZ(0);
     transform: translateZ(0);
-    -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
 
