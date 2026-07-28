@@ -12,10 +12,7 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
-    /* 'clip' em vez de 'hidden': corta a rolagem lateral igual, mas NÃO cria um
-       container de rolagem — no Safari iOS, 'hidden' aqui quebrava o position:fixed
-       do header (ele descolava do topo). 'clip' mantém o header fixo certinho. */
-    overflow-x: clip
+    overflow-x: hidden
 }
 
 @media(prefers-reduced-motion:reduce) {
