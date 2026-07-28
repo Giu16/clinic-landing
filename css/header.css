@@ -6,7 +6,8 @@
     top: 0;
     left: 0;
     right: 0;
-    height: var(--nav-h);
+    height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+    padding-top: env(safe-area-inset-top, 0px);
     z-index: 100;
     display: flex;
     align-items: center;
@@ -163,7 +164,7 @@
     /* Dropdown logo abaixo do header — NÃO ocupa a tela toda.
        Altura automática: pega só o tamanho dos itens. */
     position: fixed;
-    top: var(--nav-h);
+    top: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
     left: 0;
     right: 0;
     z-index: 99;
