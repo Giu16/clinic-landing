@@ -3,7 +3,14 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <!-- SEM viewport-fit=cover — proposital, não remova.
+       Com "cover", o Safari iOS estende a página por baixo do notch e o
+       position:fixed do .site-header caía DEPOIS da safe area, abrindo um gap
+       escuro entre o topo e o header (só em retrato; em paisagem o inset é 0).
+       Sem "cover", a viewport já começa abaixo do notch: top:0 é o topo real
+       (gap impossível) e a faixa do notch é pintada com o background do canvas
+       (--canvas #181310), a MESMA cor do header — barra contínua desde o topo. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Pinta a área da barra de status (Safari iOS) com a cor do header, pra o
        conteúdo rolado não "vazar" atrás da barra translúcida acima do header. -->
   <meta name="theme-color" content="#181310">
@@ -16,7 +23,7 @@
   <link rel="stylesheet" href="css/variables.css">
   <link rel="stylesheet" href="css/reset.css?v=2">
   <link rel="stylesheet" href="css/global.css?v=2">
-  <link rel="stylesheet" href="css/header.css?v=3">
+  <link rel="stylesheet" href="css/header.css?v=4">
   <link rel="stylesheet" href="css/hero.css">
   <link rel="stylesheet" href="css/sections.css">
   <link rel="stylesheet" href="css/footer.css">

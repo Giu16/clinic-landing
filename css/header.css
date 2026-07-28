@@ -15,13 +15,15 @@
     border-bottom: 0.5px solid rgba(184, 149, 90, .55);
     box-shadow: var(--shadow-md);
     transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
-    /* NÃO usar transform/translateZ nem backface-visibility aqui.
-       No Safari iOS com viewport-fit=cover, promover este position:fixed a uma
-       camada de GPU faz a barra se posicionar relativa à SAFE AREA e ser
-       empurrada para baixo pelo inset-top do notch — abrindo o gap no topo
-       (só em retrato; em paisagem o inset-top é 0, por isso "some").
-       Sem o hack, o header cola no topo real (y=0) e o padding-top/height com
-       env(safe-area-inset-top) preenchem o notch de escuro, como desenhado. */
+    /* NÃO usar transform/translateZ nem backface-visibility aqui: promover um
+       position:fixed a camada de GPU é justamente o que fazia o Safari iOS
+       deslocar a barra pra baixo do notch.
+
+       Os env(safe-area-inset-top) acima hoje resolvem para 0, porque o
+       index.html NÃO usa viewport-fit=cover (veja o comentário lá): a viewport
+       já começa abaixo do notch e a faixa do notch é pintada com o background
+       do canvas (--canvas), a mesma cor deste header. Ficam aqui só como
+       defesa, caso o "cover" volte um dia. */
 }
 
 .site-header.scrolled {
