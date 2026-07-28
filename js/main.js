@@ -404,6 +404,11 @@ document.getElementById('pd-duvidas-btn').addEventListener('click', () => {
 const tabsEl = document.querySelector('.tabs');
 function positionTabPill(tab) {
   if (!tabsEl || !tab) return;
+  /* Aba sem layout (ex.: seção escondida enquanto o detalhe está aberto no mobile).
+     Sem este guarda, um 'resize' — comum quando a barra de endereço do mobile
+     aparece/some — zeraria a pílula (--tab-w/h: 0) e o texto da aba ativa, que é
+     escuro sobre a pílula, sumiria no fundo escuro ao voltar. */
+  if (!tab.offsetWidth && !tab.offsetHeight) return;
   tabsEl.style.setProperty('--tab-x', tab.offsetLeft + 'px');
   tabsEl.style.setProperty('--tab-y', tab.offsetTop + 'px');
   tabsEl.style.setProperty('--tab-w', tab.offsetWidth + 'px');
