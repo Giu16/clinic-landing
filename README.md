@@ -17,7 +17,7 @@
 
 ## 🔗 Demo
 
-**[aesthetic-clinic-landing.vercel.app](https://aesthetic-clinic-landing.vercel.app)**
+**[bellini-estetica.vercel.app](https://bellini-estetica.vercel.app)**
 
 ## ✨ Funcionalidades
 
