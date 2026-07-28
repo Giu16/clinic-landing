@@ -456,6 +456,22 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   });
 });
 
+/* Fecha qualquer pergunta aberta assim que a seção sai da tela — seja rolando,
+   navegando pelo menu ou abrindo um procedimento (que oculta a seção). Assim,
+   ao voltar, o FAQ está sempre recolhido. */
+const faqSection = document.getElementById('faq');
+if (faqSection) {
+  new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) return;
+      faqSection.querySelectorAll('.faq-item.open').forEach(i => {
+        i.classList.remove('open');
+        i.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
+      });
+    });
+  }, { threshold: 0 }).observe(faqSection);
+}
+
 /* ═══════════ Cookie ═══════════ */
 ['cookie-accept', 'cookie-decline'].forEach(id => {
   document.getElementById(id).addEventListener('click', () => {
