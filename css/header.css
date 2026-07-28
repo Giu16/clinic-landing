@@ -2,12 +2,17 @@
    HEADER
 ═══════════════════════════════════════ */
 .site-header {
-    position: fixed;
+    /* STICKY, não FIXED — proposital, não troque de volta.
+       Um sticky é posicionado pelo FLUXO do documento, não pela origem da
+       viewport. Por isso ele não tem como ser deslocado pela safe area do
+       notch, por camada de composição da GPU, pela barra de endereço do Safari
+       colapsando, nem por visual-viewport desalinhada — as quatro coisas que
+       quebravam o position:fixed aqui no Safari iOS (gap entre o topo e a
+       barra, só em retrato). Como está no fluxo, ele OCUPA --nav-h de altura:
+       por isso .hero e #proc-detail não têm mais padding-top de compensação. */
+    position: sticky;
     top: 0;
-    left: 0;
-    right: 0;
-    height: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
-    padding-top: env(safe-area-inset-top, 0px);
+    height: var(--nav-h);
     z-index: 100;
     display: flex;
     align-items: center;
@@ -15,15 +20,12 @@
     border-bottom: 0.5px solid rgba(184, 149, 90, .55);
     box-shadow: var(--shadow-md);
     transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
-    /* NÃO usar transform/translateZ nem backface-visibility aqui: promover um
-       position:fixed a camada de GPU é justamente o que fazia o Safari iOS
-       deslocar a barra pra baixo do notch.
-
-       Os env(safe-area-inset-top) acima hoje resolvem para 0, porque o
-       index.html NÃO usa viewport-fit=cover (veja o comentário lá): a viewport
-       já começa abaixo do notch e a faixa do notch é pintada com o background
-       do canvas (--canvas), a mesma cor deste header. Ficam aqui só como
-       defesa, caso o "cover" volte um dia. */
+    /* NÃO usar transform/translateZ nem backface-visibility aqui: promover o
+       header a camada de GPU foi uma das tentativas que PIOROU o problema.
+       Também não é preciso env(safe-area-inset-*): o index.html não usa
+       viewport-fit=cover, então a viewport já começa abaixo do notch e aquela
+       faixa é pintada com o background do canvas (--canvas) — a mesma cor
+       deste header. */
 }
 
 .site-header.scrolled {
@@ -173,7 +175,7 @@
     /* Dropdown logo abaixo do header — NÃO ocupa a tela toda.
        Altura automática: pega só o tamanho dos itens. */
     position: fixed;
-    top: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+    top: var(--nav-h);
     left: 0;
     right: 0;
     z-index: 99;

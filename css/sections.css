@@ -686,7 +686,7 @@
   display: none;
   background: var(--ink);
   min-height: 60vh;
-  padding-top: var(--nav-h);
+  /* sem padding-top: o header sticky já ocupa --nav-h no fluxo acima */
   --text-muted: #857668;
 }
 

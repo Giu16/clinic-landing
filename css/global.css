@@ -2,8 +2,8 @@
    UTILITIES
 ═══════════════════════════════════════ */
 html {
-    /* Para a rolagem logo abaixo do header fixo, sem cortar o topo da seção */
-    scroll-padding-top: calc(var(--nav-h) + env(safe-area-inset-top, 0px));
+    /* Para a rolagem parar logo abaixo do header sticky, sem cortar o topo da seção */
+    scroll-padding-top: var(--nav-h);
 }
 
 h1,

@@ -2,8 +2,10 @@
    HERO
 ═══════════════════════════════════════ */
 .hero {
-  min-height: 100vh;
-  padding-top: var(--nav-h);
+  /* O .site-header é sticky e ocupa --nav-h no fluxo ACIMA do hero, então aqui
+     desconta-se essa altura (antes era 100vh + padding-top pra compensar um
+     header fixed que flutuava por cima). */
+  min-height: calc(100vh - var(--nav-h));
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: relative;
