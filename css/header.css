@@ -28,6 +28,24 @@
        deste header. */
 }
 
+/* Faixa opaca ancorada ACIMA do header, na mesma cor dele.
+   Rede de segurança para o Safari iOS: se por qualquer motivo o WebKit deslocar
+   a barra pra baixo (safe area do notch, barra de endereço colapsando, etc), esta
+   faixa desce JUNTO — ela é absolute relativa ao próprio header — e continua
+   tapando o espaço acima, então o conteúdo da página nunca aparece ali.
+   Quando o header está na posição certa (top:0), ela fica fora da tela: invisível.
+   Não afeta layout nem cria rolagem (absolute, e o browser não rola pra cima de 0). */
+.site-header::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 100%;
+    height: 200px;
+    background: var(--canvas);
+    pointer-events: none;
+}
+
 .site-header.scrolled {
     background: var(--canvas);
     box-shadow: var(--shadow-md);
