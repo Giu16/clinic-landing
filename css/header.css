@@ -2,7 +2,8 @@
    HEADER
 ═══════════════════════════════════════ */
 .site-header {
-    position: fixed;
+    position: -webkit-sticky; /* Essencial para o Safari antigo/atual */
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -15,6 +16,9 @@
     border-bottom: 0.5px solid rgba(184, 149, 90, .55);
     box-shadow: var(--shadow-md);
     transition: background .35s ease, box-shadow .35s ease, border-color .35s ease;
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    will-change: transform;
 }
 
 .site-header.scrolled {
