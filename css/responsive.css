@@ -195,7 +195,11 @@
     scroll-snap-type: x mandatory;
     scroll-padding-inline: var(--sp-6);
     scrollbar-width: none;
-    -webkit-overflow-scrolling: touch
+    -webkit-overflow-scrolling: touch;
+    /* Trava o gesto no eixo horizontal: deslizar pro lado move o carrossel;
+       deslizar pra cima/baixo rola a página e o carrossel fica fixo (sem
+       seguir o dedo na diagonal). */
+    touch-action: pan-x
   }
 
   .team-grid::-webkit-scrollbar {
