@@ -228,19 +228,9 @@ a.ft-contact-item:hover {
   transform: scale(.93);
 }
 
-/* Glow EXTERNO (sombra de contato + halo dourado) num elemento TRANSPARENTE atrás
-   do botão. Sem fundo opaco, o iOS não tem borda pra costurar → linha impossível.
-   O respiro é só opacidade (geometria zero), então nunca vira anel/linha. */
-.wa-float::before {
-  content: '';
-  position: absolute;
-  z-index: -1;
-  inset: 0;
-  border-radius: 50%;
-  box-shadow:
-    0 4px 10px rgba(24, 19, 16, .22),
-    0 14px 34px rgba(184, 143, 94, .45);
-}
+/* Sem glow externo (chapado): no Safari iOS qualquer sombra PARA FORA num elemento
+   redondo desenhava uma linha na luz. O relevo vem só das sombras INTERNAS acima —
+   efeito medalhão, moderno, sem nada projetado pra fora. */
 
 /* Brilho especular que varre a superfície (reflexo de metal premium) */
 .wa-float::after {
@@ -256,13 +246,7 @@ a.ft-contact-item:hover {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .wa-float::before { animation: waGlow 3.4s ease-in-out infinite; }
-  .wa-float::after  { animation: waSheen 6.5s ease-in-out infinite; }
-}
-
-@keyframes waGlow {
-  0%, 100% { opacity: .82; }
-  50%      { opacity: 1; }
+  .wa-float::after { animation: waSheen 6.5s ease-in-out infinite; }
 }
 
 @keyframes waSheen {
