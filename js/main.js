@@ -37,14 +37,14 @@ ham.addEventListener('click', () => {
   const open = mNav.classList.toggle('open');
   ham.classList.toggle('open', open);
   ham.setAttribute('aria-expanded', open);
-  document.body.style.overflow = open ? 'hidden' : '';
+  /* Sem travar o scroll do body: o menu é um dropdown (não cobre a tela toda),
+     então a página continua rolável com o menu aberto — como a Giu pediu. */
 });
 mNav.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
     mNav.classList.remove('open');
     ham.classList.remove('open');
     ham.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
   });
 });
 
