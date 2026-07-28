@@ -196,26 +196,24 @@ a.ft-contact-item:hover {
   right: var(--sp-6);
   width: 56px;
   height: 56px;
-  border-radius: var(--r-full);
+  border-radius: 50%;            /* 50% (não 9999px): o iOS renderiza a sombra sem imprecisão */
   display: none;                 /* exibido apenas no mobile (ver responsive.css) */
   align-items: center;
   justify-content: center;
   color: var(--canvas);          /* ícone escuro sobre o gold */
-  /* Ouro polido: luz vindo do canto superior esquerdo, aprofundando na borda */
+  /* Ouro polido: luz vindo do canto superior esquerdo */
   background: radial-gradient(circle at 32% 26%, var(--gold-light), var(--gold) 58%, #A9784A 100%);
-  /* Rim de luz como box-shadow inset (1º layer), não como border: no Safari iOS
-     a border em elemento redondo com sombra deixava uma "costura" cortando o glow.
-     Camadas: rim + gloss no topo + profundidade embaixo + sombra de contato + glow dourado */
+  /* SÓ sombras INTERNAS no botão (rim + gloss + profundidade) — sombra interna
+     nunca costura. O glow EXTERNO vai no ::before (atrás, transparente): no Safari
+     iOS, sombra externa no próprio elemento redondo com fundo opaco deixava uma
+     linha na borda da luz. */
   box-shadow:
     inset 0 0 0 1px rgba(248, 244, 238, .22),
     inset 0 1px 1px rgba(255, 255, 255, .5),
-    inset 0 -3px 7px rgba(24, 19, 16, .2),
-    0 4px 10px rgba(24, 19, 16, .22),
-    0 14px 34px rgba(184, 143, 94, .4);
+    inset 0 -3px 7px rgba(24, 19, 16, .2);
   z-index: 90;
-  -webkit-backface-visibility: hidden;   /* iOS: renderiza a sombra sem emenda */
   -webkit-tap-highlight-color: transparent;
-  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s ease;
+  transition: transform .3s cubic-bezier(.34, 1.56, .64, 1);
 }
 
 .wa-float svg {
@@ -226,38 +224,31 @@ a.ft-contact-item:hover {
   filter: drop-shadow(0 1px 1px rgba(24, 19, 16, .25));
 }
 
-.wa-float:hover {
-  transform: translateY(-2px) scale(1.05);
-  box-shadow:
-    inset 0 0 0 1px rgba(248, 244, 238, .22),
-    inset 0 1px 1px rgba(255, 255, 255, .5),
-    inset 0 -3px 7px rgba(24, 19, 16, .2),
-    0 8px 16px rgba(24, 19, 16, .24),
-    0 20px 46px rgba(184, 143, 94, .5);
-}
-
 .wa-float:active {
   transform: scale(.93);
 }
 
-/* Halo dourado pulsando devagar — com desfoque (blur) para ser um glow difuso,
-   nunca um anel de borda dura (que no Safari iOS virava uma linha cortando a luz). */
+/* Glow EXTERNO (sombra de contato + halo dourado) num elemento TRANSPARENTE atrás
+   do botão. Sem fundo opaco, o iOS não tem borda pra costurar → linha impossível.
+   O respiro é só opacidade (geometria zero), então nunca vira anel/linha. */
 .wa-float::before {
   content: '';
   position: absolute;
+  z-index: -1;
   inset: 0;
-  z-index: 0;
-  border-radius: inherit;
-  box-shadow: 0 0 10px 0 rgba(184, 143, 94, 0);
+  border-radius: 50%;
+  box-shadow:
+    0 4px 10px rgba(24, 19, 16, .22),
+    0 14px 34px rgba(184, 143, 94, .45);
 }
 
 /* Brilho especular que varre a superfície (reflexo de metal premium) */
 .wa-float::after {
   content: '';
   position: absolute;
-  inset: 0;
   z-index: 1;
-  border-radius: inherit;
+  inset: 0;
+  border-radius: 50%;
   background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, .55) 50%, transparent 62%);
   background-size: 250% 100%;
   background-position: 150% 0;
@@ -265,14 +256,13 @@ a.ft-contact-item:hover {
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .wa-float::before { animation: waHalo 3s ease-out infinite; }
+  .wa-float::before { animation: waGlow 3.4s ease-in-out infinite; }
   .wa-float::after  { animation: waSheen 6.5s ease-in-out infinite; }
 }
 
-@keyframes waHalo {
-  0%   { box-shadow: 0 0 10px 1px rgba(184, 143, 94, .5); }
-  70%  { box-shadow: 0 0 14px 13px rgba(184, 143, 94, 0); }
-  100% { box-shadow: 0 0 14px 13px rgba(184, 143, 94, 0); }
+@keyframes waGlow {
+  0%, 100% { opacity: .82; }
+  50%      { opacity: 1; }
 }
 
 @keyframes waSheen {
