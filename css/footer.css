@@ -240,14 +240,15 @@ a.ft-contact-item:hover {
   transform: scale(.93);
 }
 
-/* Halo dourado pulsando devagar */
+/* Halo dourado pulsando devagar — com desfoque (blur) para ser um glow difuso,
+   nunca um anel de borda dura (que no Safari iOS virava uma linha cortando a luz). */
 .wa-float::before {
   content: '';
   position: absolute;
   inset: 0;
   z-index: 0;
   border-radius: inherit;
-  box-shadow: 0 0 0 0 rgba(184, 143, 94, .45);
+  box-shadow: 0 0 10px 0 rgba(184, 143, 94, 0);
 }
 
 /* Brilho especular que varre a superfície (reflexo de metal premium) */
@@ -269,9 +270,9 @@ a.ft-contact-item:hover {
 }
 
 @keyframes waHalo {
-  0%   { box-shadow: 0 0 0 0 rgba(184, 143, 94, .5); }
-  70%  { box-shadow: 0 0 0 15px rgba(184, 143, 94, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(184, 143, 94, 0); }
+  0%   { box-shadow: 0 0 10px 1px rgba(184, 143, 94, .5); }
+  70%  { box-shadow: 0 0 14px 13px rgba(184, 143, 94, 0); }
+  100% { box-shadow: 0 0 14px 13px rgba(184, 143, 94, 0); }
 }
 
 @keyframes waSheen {
