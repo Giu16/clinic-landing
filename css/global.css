@@ -148,13 +148,10 @@ h3,
    #6 — Grão sutil sobre o fundo (textura premium, dark luxury).
    Muito discreto (opacity .04). Ajuste a opacidade p/ mais/menos grão.
 ═══════════════════════════════════════ */
-/* ⚠️ DESATIVADO enquanto caçamos o gap no topo do header no Safari iOS.
-   Era um position:fixed cobrindo a tela INTEIRA em z-index 9999, com textura,
-   por cima de tudo — uma camada composta de viewport inteira que o WebKit tem
-   que reposicionar a cada frame de rolagem. Suspeito de desestabilizar a
-   composição dos outros elementos fixed/sticky (o .site-header).
-   Para reativar (se o gap tiver outra causa), descomente: */
-/*
+/* Grão sutil sobre o fundo (textura premium). Reativado após a correção do gap
+   do header — era um dos 4 suspeitos, testado isoladamente. Camada ESTÁTICA
+   (sem animação), então não repinta a cada frame. Se o gap do topo voltar no
+   Safari iOS, este é o primeiro a desativar de novo. */
 body::before {
     content: '';
     position: fixed;
@@ -164,7 +161,6 @@ body::before {
     opacity: .04;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
-*/
 
 /* ═══════════════════════════════════════
    #7 — Foco de teclado consistente (dourado) para acessibilidade.
