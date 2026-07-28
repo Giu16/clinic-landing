@@ -306,27 +306,35 @@ function viewTransition(mutate) {
   return document.startViewTransition(mutate);
 }
 
+/* Posição de scroll no momento em que o detalhe foi aberto — para voltar
+   exatamente onde estávamos, sem o "whoosh" de rolagem suave do topo até a seção. */
+let savedScrollY = 0;
+
 function closeDetail(scrollTarget) {
+  /* "Voltar" (botão de voltar do detalhe): restaura a posição salva, instantâneo.
+     Links de âncora do menu/rodapé: navegam de fato para a seção pedida. */
+  const restoreBack = !scrollTarget || scrollTarget === '#procedimentos';
   viewTransition(() => {
     document.body.classList.remove('detail-open');
     document.getElementById('proc-detail').setAttribute('aria-hidden', 'true');
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: restoreBack ? savedScrollY : 0, behavior: 'instant' });
   });
   if (location.hash.startsWith('#proc-')) {
     history.replaceState(null, '', location.pathname + location.search);
   }
-  const target = scrollTarget || '#procedimentos';
+  if (restoreBack) return;
   setTimeout(() => {
-    if (target === '#inicio') {
+    if (scrollTarget === '#inicio') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      const el = document.querySelector(target);
+      const el = document.querySelector(scrollTarget);
       if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
   }, 80);
 }
 
 function openDetail(proc, cat, idx, skipPush, sourceImg) {
+  savedScrollY = window.scrollY;   /* onde estávamos antes de abrir o detalhe */
   document.getElementById('pd-title').textContent = proc.name;
   document.getElementById('pd-lead').textContent = proc.lead;
   document.getElementById('pd-body').textContent = proc.longDesc;
@@ -387,11 +395,7 @@ window.addEventListener('popstate', () => {
   if (!document.body.classList.contains('detail-open')) return;
   document.body.classList.remove('detail-open');
   document.getElementById('proc-detail').setAttribute('aria-hidden', 'true');
-  window.scrollTo({ top: 0, behavior: 'instant' });
-  setTimeout(() => {
-    const el = document.querySelector('#procedimentos');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  }, 80);
+  window.scrollTo({ top: savedScrollY, behavior: 'instant' });   /* volta onde estava, sem movimento */
 });
 
 /* Botão "← Todos os Tratamentos" */
