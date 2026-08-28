@@ -1,7 +1,3 @@
-/* ════════════════════════════════
-   FOOTER
-════════════════════════════════ */
-
 .site-footer {
   background: #0D0B09;
   padding: var(--sp-20) 0 0;
@@ -115,7 +111,6 @@
   color: #fff;
 }
 
-/* Contato com ícones (telefone, e-mail, endereço, horários) */
 .ft-contact {
   display: flex;
   flex-direction: column;
@@ -189,24 +184,19 @@ a.ft-contact-item:hover {
   transform: translateY(-3px);
 }
 
-/* ═══════════ Botão flutuante de contato (WhatsApp) — só no mobile ═══════════ */
+/*  Botão flutuante de contato (WhatsApp) */
 .wa-float {
   position: fixed;
   bottom: var(--sp-6);
   right: var(--sp-6);
   width: 56px;
   height: 56px;
-  border-radius: 50%;            /* 50% (não 9999px): o iOS renderiza a sombra sem imprecisão */
-  display: none;                 /* exibido apenas no mobile (ver responsive.css) */
+  border-radius: 50%;            
+  display: none;               
   align-items: center;
   justify-content: center;
-  color: var(--canvas);          /* ícone escuro sobre o gold */
-  /* Ouro polido: luz vindo do canto superior esquerdo */
+  color: var(--canvas);         
   background: radial-gradient(circle at 32% 26%, var(--gold-light), var(--gold) 58%, #A9784A 100%);
-  /* SÓ sombras INTERNAS no botão (rim + gloss + profundidade) — sombra interna
-     nunca costura. O glow EXTERNO vai no ::before (atrás, transparente): no Safari
-     iOS, sombra externa no próprio elemento redondo com fundo opaco deixava uma
-     linha na borda da luz. */
   box-shadow:
     inset 0 0 0 1px rgba(248, 244, 238, .22),
     inset 0 1px 1px rgba(255, 255, 255, .5),
@@ -218,7 +208,7 @@ a.ft-contact-item:hover {
 
 .wa-float svg {
   position: relative;
-  z-index: 2;                    /* ícone acima do brilho */
+  z-index: 2;                    
   width: 25px;
   height: 25px;
   filter: drop-shadow(0 1px 1px rgba(24, 19, 16, .25));
@@ -228,8 +218,6 @@ a.ft-contact-item:hover {
   transform: scale(.93);
 }
 
-/* Glow EXTERNO (sombra de contato + halo dourado) num elemento TRANSPARENTE atrás
-   do botão. O respiro é só opacidade (geometria zero). */
 .wa-float::before {
   content: '';
   position: absolute;
@@ -240,21 +228,6 @@ a.ft-contact-item:hover {
     0 4px 10px rgba(24, 19, 16, .22),
     0 14px 34px rgba(184, 143, 94, .45);
 }
-
-/* ⚠️ REMOVIDAS as animações infinitas deste botão (waGlow e waSheen) e o ::after
-   que existia só para a varredura de brilho.
-
-   Motivo: este botão é position:fixed, e a waSheen animava background-position —
-   propriedade NÃO acelerada por GPU. Resultado: repaint infinito na thread
-   principal de um elemento fixo, o que atrapalha o caminho de scroll assíncrono
-   do WebKit e faz elementos fixed/sticky (o .site-header) serem desenhados com
-   offset de scroll defasado — o gap no topo, só no iOS, que sumia ao girar o
-   aparelho (girar força recomposição).
-
-   Se for reintroduzir brilho aqui, anime SOMENTE transform/opacity (aceleradas
-   por GPU). NUNCA background-position, width/height, top/left ou box-shadow. */
-
-/* O glow estático do ::before continua: box-shadow parado não repinta nada. */
 
 #cookie-banner {
   position: fixed;
@@ -273,7 +246,7 @@ a.ft-contact-item:hover {
   display: block;
 }
 
-/* Texto e link do banner de cookies (antes inline; movidos p/ CSP sem 'unsafe-inline') */
+/* Texto e link do banner de cookies */
 .cookie-text {
   font-size: var(--sz-sm);
   color: var(--text-muted);
