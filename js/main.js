@@ -1,8 +1,4 @@
-/* ═══════════ Fallback de imagem SEM handler inline (compatível com CSP) ═══════════
-   O evento 'error' de recursos (img) não borbulha, então escutamos na fase de
-   captura. Se uma imagem falhar ao carregar, ela some e revela o placeholder;
-   a imagem da tela de detalhe (#pd-image) apenas se esconde. Isso permite uma
-   Content-Security-Policy rígida (script-src 'self', sem 'unsafe-inline'). */
+
 window.addEventListener('error', e => {
   const el = e.target;
   if (!(el instanceof HTMLImageElement)) return;
@@ -10,7 +6,7 @@ window.addEventListener('error', e => {
   else el.remove();
 }, true);
 
-/* Reset state on bfcache restore */
+
 window.addEventListener('pageshow', e => {
   if (e.persisted) {
     document.body.classList.remove('detail-open');
@@ -20,25 +16,18 @@ window.addEventListener('pageshow', e => {
 });
 
 
-/* ═══════════ Scroll ═══════════
-   NÃO voltar a mexer em classe/estilo do .site-header aqui dentro. Mutar um
-   elemento sticky/fixed durante o scroll tira ele do caminho de scroll
-   assíncrono do WebKit e faz a barra ser desenhada com offset defasado — era
-   o gap no topo no Safari iOS. A classe .scrolled era código morto: tinha
-   exatamente os mesmos valores da regra base. */
+/* Scroll */
 window.addEventListener('scroll', () => {
   document.getElementById('btt').classList.toggle('show', scrollY > 600);
 }, { passive: true });
 
-/* ═══════════ Mobile menu ═══════════ */
+/*  Mobile menu  */
 const ham = document.getElementById('hamburger');
 const mNav = document.getElementById('mobile-nav');
 ham.addEventListener('click', () => {
   const open = mNav.classList.toggle('open');
   ham.classList.toggle('open', open);
   ham.setAttribute('aria-expanded', open);
-  /* Sem travar o scroll do body: o menu é um dropdown (não cobre a tela toda),
-     então a página continua rolável com o menu aberto — como a Giu pediu. */
 });
 mNav.querySelectorAll('a').forEach(a => {
   a.addEventListener('click', () => {
@@ -48,8 +37,7 @@ mNav.querySelectorAll('a').forEach(a => {
   });
 });
 
-/* Fecha o menu assim que a página começa a rolar. A guarda no início mantém o
-   handler barato: em rolagem normal (menu fechado) ele sai na primeira linha. */
+
 window.addEventListener('scroll', () => {
   if (!mNav.classList.contains('open')) return;
   mNav.classList.remove('open');
@@ -57,7 +45,7 @@ window.addEventListener('scroll', () => {
   ham.setAttribute('aria-expanded', 'false');
 }, { passive: true });
 
-/* ═══════════ Seção atual em dourado (scroll-spy) — menu desktop + mobile ═══════════ */
+/*  Seção atual em dourado */
 const spyLinks = [...document.querySelectorAll('.nav-links .nav-link, .mobile-nav .nav-link')];
 const spyTargets = [...new Set(spyLinks.map(a => a.getAttribute('href')))]
   .map(h => document.querySelector(h))
@@ -74,7 +62,7 @@ const spy = new IntersectionObserver(entries => {
 
 spyTargets.forEach(s => spy.observe(s));
 
-/* ═══════════ Carrossel da equipe — seta avança um card (loop no fim) ═══════════ */
+/*  Carrossel da equipe  */
 const teamGrid = document.querySelector('.team-grid');
 const teamNext = document.getElementById('team-next');
 if (teamGrid && teamNext) {
@@ -88,7 +76,7 @@ if (teamGrid && teamNext) {
   });
 }
 
-/* ═══════════ Contadores animados nos números ═══════════ */
+/*  Contadores animados nos números  */
 (function () {
   const els = document.querySelectorAll('.stat-val, .badge-num');
   if (!els.length) return;
@@ -121,7 +109,7 @@ if (teamGrid && teamNext) {
   els.forEach(el => io.observe(el));
 })();
 
-/* ═══════════ Scroll reveal ═══════════ */
+
 const ro = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) { e.target.classList.add('in'); ro.unobserve(e.target); }
@@ -129,7 +117,7 @@ const ro = new IntersectionObserver(entries => {
 }, { threshold: .12 });
 document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
 
-/* ═══════════ Procedimentos data ═══════════ */
+
 const procedimentos = {
   facial: [
     {
@@ -259,7 +247,7 @@ const procedimentos = {
   ],
 };
 
-/* ═══════════ Proc cards render ═══════════ */
+
 function renderProcs(cat) {
   const grid = document.getElementById('procs-grid');
   grid.innerHTML = procedimentos[cat].map((p, i) => `
@@ -296,8 +284,7 @@ function renderProcs(cat) {
   });
 }
 
-/* ═══════════ Proc detail ═══════════ */
-/* View Transition com fallback (navegador antigo + prefers-reduced-motion) */
+
 function viewTransition(mutate) {
   if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {
     mutate();
@@ -306,13 +293,11 @@ function viewTransition(mutate) {
   return document.startViewTransition(mutate);
 }
 
-/* Posição de scroll no momento em que o detalhe foi aberto — para voltar
-   exatamente onde estávamos, sem o "whoosh" de rolagem suave do topo até a seção. */
+
 let savedScrollY = 0;
 
 function closeDetail(scrollTarget) {
-  /* "Voltar" (botão de voltar do detalhe): restaura a posição salva, instantâneo.
-     Links de âncora do menu/rodapé: navegam de fato para a seção pedida. */
+
   const restoreBack = !scrollTarget || scrollTarget === '#procedimentos';
   viewTransition(() => {
     document.body.classList.remove('detail-open');
@@ -390,7 +375,7 @@ function openDetail(proc, cat, idx, skipPush, sourceImg) {
   }
 }
 
-/* Botão voltar do navegador */
+
 window.addEventListener('popstate', () => {
   if (!document.body.classList.contains('detail-open')) return;
   document.body.classList.remove('detail-open');
@@ -398,12 +383,12 @@ window.addEventListener('popstate', () => {
   window.scrollTo({ top: savedScrollY, behavior: 'instant' });   /* volta onde estava, sem movimento */
 });
 
-/* Botão "← Todos os Tratamentos" */
+
 document.getElementById('pd-back').addEventListener('click', () => {
   closeDetail('#procedimentos');
 });
 
-/* Links do header/footer com âncora fecham o detalhe primeiro */
+
 document.querySelectorAll('a[href^="#"]').forEach(a => {
   a.addEventListener('click', e => {
     if (!document.body.classList.contains('detail-open')) return;
@@ -416,14 +401,11 @@ document.getElementById('pd-duvidas-btn').addEventListener('click', () => {
   document.getElementById('pd-faq-section').scrollIntoView({ behavior: 'smooth' });
 });
 
-/* ═══════════ Tabs ═══════════ */
+/*  Tabs  */
 const tabsEl = document.querySelector('.tabs');
 function positionTabPill(tab) {
   if (!tabsEl || !tab) return;
-  /* Aba sem layout (ex.: seção escondida enquanto o detalhe está aberto no mobile).
-     Sem este guarda, um 'resize' — comum quando a barra de endereço do mobile
-     aparece/some — zeraria a pílula (--tab-w/h: 0) e o texto da aba ativa, que é
-     escuro sobre a pílula, sumiria no fundo escuro ao voltar. */
+
   if (!tab.offsetWidth && !tab.offsetHeight) return;
   tabsEl.style.setProperty('--tab-x', tab.offsetLeft + 'px');
   tabsEl.style.setProperty('--tab-y', tab.offsetTop + 'px');
@@ -441,12 +423,12 @@ document.querySelectorAll('.tab').forEach(btn => {
 });
 renderProcs('facial');
 
-/* Posiciona a pílula na aba ativa inicial (sem transição), depois habilita o deslize */
+
 positionTabPill(document.querySelector('.tab.on'));
 requestAnimationFrame(() => tabsEl && tabsEl.classList.add('ready'));
 window.addEventListener('resize', () => positionTabPill(document.querySelector('.tab.on')));
 
-/* Abre o procedimento direto se URL tiver hash (ex: após refresh) */
+
 (function () {
   const m = location.hash.match(/^#proc-(\w+)-(\d+)$/);
   if (!m) return;
@@ -456,7 +438,7 @@ window.addEventListener('resize', () => positionTabPill(document.querySelector('
   }
 })();
 
-/* ═══════════ FAQ ═══════════ */
+/*  FAQ  */
 document.querySelectorAll('.faq-q').forEach(btn => {
   btn.addEventListener('click', () => {
     const item = btn.closest('.faq-item');
@@ -472,9 +454,7 @@ document.querySelectorAll('.faq-q').forEach(btn => {
   });
 });
 
-/* Fecha qualquer pergunta aberta assim que a seção sai da tela — seja rolando,
-   navegando pelo menu ou abrindo um procedimento (que oculta a seção). Assim,
-   ao voltar, o FAQ está sempre recolhido. */
+/* Fecha qualquer pergunta aberta */
 const faqSection = document.getElementById('faq');
 if (faqSection) {
   new IntersectionObserver(entries => {
@@ -488,14 +468,14 @@ if (faqSection) {
   }, { threshold: 0 }).observe(faqSection);
 }
 
-/* ═══════════ Cookie ═══════════ */
+/*  Cookie  */
 ['cookie-accept', 'cookie-decline'].forEach(id => {
   document.getElementById(id).addEventListener('click', () => {
     document.getElementById('cookie-banner').style.display = 'none';
   });
 });
 
-/* ═══════════ Back to top ═══════════ */
+/*  Back to top  */
 document.getElementById('btt').addEventListener('click', () => {
   window.scrollTo({ top: 0, behavior: 'smooth' });
 });
