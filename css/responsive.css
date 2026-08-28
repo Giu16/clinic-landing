@@ -1,25 +1,11 @@
-/* ═══════════════════════════════════════
-   RESPONSIVE
-═══════════════════════════════════════ */
 @media(max-width:1100px) {
   .hero {
     grid-template-columns: 1fr;
-    /* Imagem vertical só para celular/tablet — o desktop mantém a 16:9 no hero.css.
-       Troque o arquivo em assets/images/hero/dra-helena-mobile.png */
     background-image: url('../assets/images/hero/dra-helena-mobile.webp');
-    /* ZOOM: quanto maior o %, mais perto. "cover" = sem zoom extra.
-       Ex.: 180% (pouco) · 200% (médio) · 240% (bastante). */
     background-size: 250%;
-    /* POSIÇÃO: 1º valor = horizontal — AUMENTE o % (até 100%) para mover
-       a Helena para a ESQUERDA; diminua para a direita.
-       2º valor = vertical ("top" mantém o rosto no topo). */
     background-position: 70% top
   }
 
-  /* Véu na cor do site sobre a foto INTEIRA, translúcido até o fim:
-     a imagem continua aparecendo (escurecida) até o final da página, sem virar sólido.
-     O ÚLTIMO alpha (.75) controla quanto da foto aparece embaixo:
-     MENOR = foto mais visível no fim · MAIOR = mais escuro. */
   .hero::before {
     background:
       linear-gradient(to bottom,
@@ -29,9 +15,6 @@
         rgba(24, 19, 16, .88) 100%)
   }
 
-  /* Texto centralizado na vertical (centro da página), alinhado à esquerda.
-     Para dar um "nudge": aumente padding-bottom p/ subir, ou padding-top p/ descer.
-     Ex.: padding: 0 var(--sp-6) var(--sp-8);  (sobe um pouco) */
   .hero-content {
     max-width: 100%;
     margin: 0;
@@ -40,7 +23,6 @@
     text-align: left
   }
 
-  /* Tag à esquerda, tracinho menor e tudo em uma linha só */
   .hero-tag {
     justify-content: flex-start;
     margin-bottom: var(--sp-6)
@@ -56,7 +38,6 @@
     white-space: nowrap
   }
 
-  /* Compacta o texto no mobile para revelar mais a foto no topo */
   .hero-h1 {
     margin-bottom: var(--sp-5)
   }
@@ -67,7 +48,6 @@
     margin-bottom: var(--sp-8)
   }
 
-  /* Botões empilhados, mesma largura (100%) e mesmo tamanho */
   .hero-actions {
     flex-direction: column;
     align-items: stretch;
@@ -92,7 +72,6 @@
     padding-left: var(--sp-3)
   }
 
-  /* Números maiores; labels menores. Sem quebrar linha. */
   .stat-val {
     font-size: clamp(1.15rem, 5.6vw, 1.6rem);
     white-space: nowrap
@@ -103,25 +82,19 @@
     letter-spacing: .06em
   }
 
-  /* Sobre a médica: 1 coluna; foto entre o título e o texto */
   .about-grid {
     grid-template-columns: 1fr;
     gap: 0
   }
 
-  /* Dissolve a coluna de texto p/ intercalar a foto entre o h2 e os parágrafos */
   .about-grid > .reveal.d1 {
     display: contents
   }
 
-  /* display:contents remove a caixa da .reveal.d1, então o IntersectionObserver
-     nunca marca '.in' aqui — restaura o traço do eyebrow que dependia disso */
   .about-grid > .reveal.d1 .eyebrow::before {
     transform: none
   }
-
-  /* Mostra a foto (estava escondida), centralizada, entre o título e o texto.
-     TAMANHO da foto: ajuste o max-width. Espaçamento: o 3º valor do margin. */
+  
   .about-photo-wrap {
     display: block;
     order: 2;
@@ -141,8 +114,6 @@
     order: 3
   }
 
-  /* Foto da médica no mobile: segue o padrão do site — quadrada e sem borda.
-     Esconde os cantos em L (só aparecem no desktop). */
   .about-photo-wrap::before,
   .about-photo-wrap::after {
     display: none
@@ -184,10 +155,6 @@
     grid-column: 1 / -1
   }
 
-  /* Nossa Equipe: carrossel horizontal com "peek" (padrão moderno de mobile).
-     Mantém os cards do site (foto quadrada + nome serif + função dourada).
-     LARGURA do card: flex-basis 78% (menor = mais cards à mostra).
-     Reverter p/ grade: .team-grid { display:grid; grid-template-columns:repeat(2,1fr) } */
   .team-grid {
     display: flex;
     gap: var(--sp-4);
@@ -215,8 +182,6 @@
     display: flex
   }
 
-  /* Botão flutuante de WhatsApp aparece; o "voltar ao topo" sobe e centraliza
-     sobre ele pra não colidirem no canto inferior direito. */
   .wa-float {
     display: inline-flex
   }
@@ -226,10 +191,6 @@
     bottom: calc(var(--sp-6) + 56px + var(--sp-3))
   }
 
-  /* Badge "frosted glass" (moderno) — mantém quadrado + identidade dark/gold.
-     A foto aparece DESFOCADA atrás do card.
-     Reverter o vidro: background: var(--canvas) e remover as 2 linhas backdrop-filter.
-     INTENSIDADE do desfoque: o blur(12px). TAMANHO: .badge-num + padding. */
   .about-badge {
     left: auto;
     right: var(--sp-4);
@@ -245,7 +206,6 @@
     font-size: var(--sz-3xl)
   }
 
-  /* Hairline dourado separando o número do rótulo (hierarquia + toque editorial) */
   .about-badge .badge-lbl {
     font-size: var(--sz-xs);
     margin-top: var(--sp-2);
@@ -253,7 +213,6 @@
     border-top: 1px solid rgba(184, 149, 90, .3)
   }
 
-  /* Botões da seção "Sobre": empilhados e mesma largura — igual ao hero */
   .about-actions {
     flex-direction: column;
     align-items: stretch
