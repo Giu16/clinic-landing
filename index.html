@@ -3,24 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <!-- SEM viewport-fit=cover — proposital, não remova.
-       Com "cover", o Safari iOS estende a página por baixo do notch e o
-       position:fixed do .site-header caía DEPOIS da safe area, abrindo um gap
-       escuro entre o topo e o header (só em retrato; em paisagem o inset é 0).
-       Sem "cover", a viewport já começa abaixo do notch: top:0 é o topo real
-       (gap impossível) e a faixa do notch é pintada com o background do canvas
-       (--canvas #181310), a MESMA cor do header — barra contínua desde o topo. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Pinta a área da barra de status (Safari iOS) com a cor do header, pra o
-       conteúdo rolado não "vazar" atrás da barra translúcida acima do header. -->
   <meta name="theme-color" content="#181310">
   <title>Dra. Helena Bellini | Medicina Estética Avançada</title>
   <meta name="description"
     content="Medicina Estética de alta performance em Campo Grande - MS. Harmonização Facial, Bioestimuladores, Toxina Botulínica e muito mais. Atendimento humanizado com protocolos baseados em evidências.">
 
-  <!-- ════════ Preview ao compartilhar o link (Open Graph + Twitter) ════════
-       A og:image PRECISA ser URL absoluta. Se trocar o card, regenere o JPG e
-       incremente o ?v= da og:image (WhatsApp/Facebook cacheiam a imagem por URL). -->
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Dra. Helena Bellini — Medicina Estética Avançada">
   <meta property="og:locale" content="pt_BR">
@@ -52,7 +40,7 @@
 
 <body>
 
-  <!-- ════════ HEADER ════════ -->
+  <!--  HEADER  -->
   <header class="site-header" id="site-header">
     <div class="container">
       <div class="header-inner">
@@ -81,7 +69,7 @@
     </div>
   </header>
 
-  <!-- Mobile nav -->
+  <!-- Mobile  -->
   <nav class="mobile-nav" id="mobile-nav" aria-label="Menu mobile" role="dialog">
     <a href="#inicio" class="nav-link">INÍCIO</a>
     <a href="#sobre" class="nav-link">SOBRE</a>
@@ -91,7 +79,7 @@
     <a href="#faq" class="nav-link">DÚVIDAS</a>
   </nav>
 
-  <!-- ════════ HERO ════════ -->
+  <!--  HERO  -->
   <section id="inicio" class="hero" aria-label="Apresentação">
     <div class="hero-content">
       <div class="hero-tag">
@@ -125,7 +113,7 @@
     </div>
   </section>
 
-  <!-- ════════ SOBRE ════════ -->
+  <!--  SOBRE  -->
   <section id="sobre" class="section section-alt" aria-labelledby="about-title">
     <div class="container">
       <div class="about-grid">
@@ -179,7 +167,7 @@
     </div>
   </section>
 
-  <!-- ════════ PROCEDIMENTOS ════════ -->
+  <!--  PROCEDIMENTOS  -->
   <section id="procedimentos" class="section" aria-labelledby="procs-title">
     <div class="container">
       <div class="procs-header reveal">
@@ -200,7 +188,7 @@
     </div>
   </section>
 
-  <!-- ════════ DIFERENCIAIS ════════ -->
+  <!--  DIFERENCIAIS  -->
   <section class="section section-alt" aria-labelledby="diff-title">
     <div class="container">
       <div class="procs-header reveal">
@@ -242,7 +230,7 @@
     </div>
   </section>
 
-  <!-- ════════ EQUIPE ════════ -->
+  <!--  EQUIPE  -->
   <section id="equipe" class="section" aria-labelledby="team-title">
     <div class="container">
       <div class="procs-header reveal">
@@ -306,7 +294,7 @@
     </div>
   </section>
 
-  <!-- ════════ DEPOIMENTOS ════════ -->
+  <!--  DEPOIMENTOS  -->
   <section id="depoimentos" class="section section-alt" aria-labelledby="test-title">
     <div class="container">
       <div class="procs-header reveal">
@@ -361,7 +349,7 @@
     </div>
   </section>
 
-  <!-- ════════ FAQ ════════ -->
+  <!--  FAQ  -->
   <section id="faq" class="section" aria-labelledby="faq-title">
     <div class="container">
       <div class="procs-header reveal">
@@ -430,7 +418,7 @@
     </div>
   </section>
 
-  <!-- ════════ PROC DETAIL ════════ -->
+  <!--  PROC DETAIL  -->
   <div id="proc-detail" aria-hidden="true">
     <div class="pd-back-bar">
       <div class="container">
@@ -509,7 +497,7 @@
     </div>
   </div>
 
-  <!-- ════════ FOOTER ════════ -->
+  <!-- FOOTER  -->
   <footer class="site-footer" aria-label="Rodapé">
 <div class="ft-inner">
 
@@ -602,7 +590,7 @@
     </div>
   </div>
 
-  <!-- Botão flutuante de contato (WhatsApp) — visível só no mobile -->
+  <!-- Botão flutuante de contato (WhatsApp) -->
   <a href="https://wa.me/5567998397624?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta."
      target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="Falar no WhatsApp">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
