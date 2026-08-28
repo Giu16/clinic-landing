@@ -1,30 +1,16 @@
-/* ═══════════════════════════════════════
-   HERO
-═══════════════════════════════════════ */
 .hero {
-  /* O .site-header é sticky e ocupa --nav-h no fluxo ACIMA do hero, então aqui
-     desconta-se essa altura (antes era 100vh + padding-top pra compensar um
-     header fixed que flutuava por cima). */
   min-height: calc(100vh - var(--nav-h));
   display: grid;
   grid-template-columns: 1fr 1fr;
   position: relative;
   overflow: hidden;
-  /* Papel de parede: troque o arquivo em assets/images/hero/hero.jpg */
   background-color: var(--canvas);
   background-image: url('../assets/images/hero/dra-helena-inicial.webp');
-  /* ZOOM da foto: aumente o número para dar mais zoom (ex.: 130%, 140%).
-     Precisa ser > 100% para "sobrar" imagem e poder mover a Helena na horizontal. */
   background-size: 120%;
-  /* POSIÇÃO: 1º valor = horizontal. Aumente o % (até 100%) para mover a Helena
-     mais para a ESQUERDA. Diminua para movê-la para a direita.
-     2º valor = vertical ("top" mantém a cabeça no lugar). */
   background-position: 20% top;
   background-repeat: no-repeat;
 }
 
-/* Esfumaçado na cor do site sobre a foto — protege a leitura do texto
-   e mescla a imagem no fundo escuro do site */
 .hero::before {
   content: '';
   position: absolute;
@@ -112,7 +98,6 @@
   border-top: 1px solid rgba(184, 149, 90, .3);
 }
 
-/* Divisor vertical fino entre os números (como na referência) */
 .hero-stats > div + div {
   position: relative;
   padding-left: var(--sp-6);
@@ -125,9 +110,7 @@
   top: 50%;
   transform: translateY(-50%);
   width: 1px;
-  /* TAMANHO do tracinho: diminua/aumente este valor (ex.: 40%, 80%) */
   height: 55%;
-  /* INTENSIDADE: mude o último número (0 = invisível, 1 = forte) */
   background: rgba(184, 149, 90, .3);
 }
 
@@ -147,10 +130,6 @@
   margin-top: var(--sp-1);
 }
 
-/* ═══════════════════════════════════════
-   #5 — Entrada em cascata do hero (no load)
-   (reduced-motion é neutralizado pelo reset.css)
-═══════════════════════════════════════ */
 @keyframes heroEnter {
   from { opacity: 0; transform: translateY(16px); }
   to   { opacity: 1; transform: none; }
@@ -169,11 +148,6 @@
 .hero-actions { animation-delay: .36s; }
 .hero-stats   { animation-delay: .48s; }
 
-/* ═══════════════════════════════════════
-   #4 — Parallax sutil da foto (scroll-driven nativo; só desktop e
-   navegadores compatíveis — degrada sem efeito nos demais).
-   Ajuste o "30%" para mais/menos deslocamento.
-═══════════════════════════════════════ */
 @keyframes heroParallax {
   to { background-position-y: 30%; }
 }
