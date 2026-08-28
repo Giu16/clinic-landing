@@ -1,6 +1,3 @@
-/* ═══════════════════════════════════════
-   RESET
-═══════════════════════════════════════ */
 *,
 *::before,
 *::after {
@@ -13,9 +10,6 @@ html {
     scroll-behavior: smooth;
     font-size: 16px;
     
-    /* SEM overflow-x aqui: no Safari iOS, overflow no elemento raiz quebra o
-       position:fixed do header (ele descola ao rolar). Nada estoura na horizontal
-       (o carrossel da equipe tem scroll próprio), então não é necessário. */
 }
 
 @media(prefers-reduced-motion:reduce) {
