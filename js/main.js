@@ -127,10 +127,10 @@ const procedimentos = {
       img: 'assets/images/procedimentos/harmonizacao-facial.webp',
       duration: '90 minutos',
       lead: 'Conjunto personalizado de procedimentos minimamente invasivos para reequilibrar proporções, suavizar assimetrias e realçar a beleza natural de cada rosto.',
-      longDesc: 'A Harmonização Facial une toxina botulínica, preenchimento com ácido hialurônico e bioestimuladores em protocolos individualizados. Conduzida com rigor técnico e sensibilidade estética, a Dra. Helena desenha cada plano respeitando as características únicas do seu rosto — o resultado é uma aparência mais descansada, equilibrada e elegante, sem alterar a sua essência.',
+      longDesc: 'A Harmonização Facial une toxina botulínica, preenchimento com ácido hialurônico e bioestimuladores em protocolos individualizados. Conduzida com rigor técnico e sensibilidade estética, a Dra. Helena desenha cada plano respeitando as características únicas do seu rosto o resultado é uma aparência mais descansada, equilibrada e elegante, sem alterar a sua essência.',
       faq: [
         { q: 'Quanto tempo duram os resultados da harmonização?', a: 'Varia por técnica: toxina de 4 a 6 meses, ácido hialurônico de 12 a 18 meses e bioestimuladores até cerca de 2 anos. Na avaliação você recebe o cronograma do seu caso.' },
-        { q: 'A harmonização vai deixar meu rosto artificial?', a: 'Não, quando é planejada e feita por médica. Doses individualizadas respeitam a sua expressão — o resultado é sutil e natural, sem cara de "fez algo".' },      ]
+        { q: 'A harmonização vai deixar meu rosto artificial?', a: 'Não, quando é planejada e feita por médica. Doses individualizadas respeitam a sua expressão o resultado é sutil e natural, sem cara de "fez algo".' },      ]
     },
     {
       name: 'Toxina Botulínica',
