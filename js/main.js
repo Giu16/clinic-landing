@@ -142,7 +142,7 @@ const procedimentos = {
       longDesc: 'A toxina botulínica atua bloqueando temporariamente os sinais nervosos nos músculos da expressão facial, reduzindo contrações involuntárias que geram rugas. Com técnica de injeção precisa e dose calibrada individualmente, o procedimento suaviza linhas da testa, região entre os olhos (glabela) e ao redor dos olhos (pés de galinha), mantendo expressividade e naturalidade. Os resultados aparecem entre 7 e 14 dias.',
       faq: [
         { q: 'Em quanto tempo aparece o resultado e quanto dura?', a: 'Os efeitos surgem em 3 a 5 dias, com resultado pleno em 10 a 14. A duração média é de 4 a 6 meses.' },
-        { q: 'A toxina botulínica vai travar a minha expressão?', a: 'Não, com dose e pontos individualizados. Suaviza as rugas mantendo os movimentos naturais — o aspecto "congelado" vem do excesso, que evitamos.' },      ]
+        { q: 'A toxina botulínica vai travar a minha expressão?', a: 'Não, com dose e pontos individualizados. Suaviza as rugas mantendo os movimentos naturais o aspecto "congelado" vem do excesso, que evitamos.' },      ]
     },
     {
       name: 'Bioestimuladores de Colágeno',
@@ -151,7 +151,7 @@ const procedimentos = {
       img: 'assets/images/procedimentos/bioestimuladores-de-colageno.webp',
       duration: '60 minutos',
       lead: 'Tratamento que estimula o próprio organismo a produzir colágeno, promovendo firmeza, volumização e rejuvenescimento progressivo com resultados naturais e duradouros.',
-      longDesc: 'Os bioestimuladores de colágeno — como Sculptra (PLLA) e Radiesse (hidroxiapatita de cálcio) — agem como biocatalisadores, desencadeando a neocolagênese: a produção natural de colágeno pelo próprio organismo. Diferente dos preenchedores, o resultado é gradual e progressivo, atingindo seu ápice entre 2 e 4 meses após a aplicação. Indicados para laxidão da pele, perda de volume e rejuvenescimento global, com efeito que pode durar de 1,5 a 2 anos.',
+      longDesc: 'Os bioestimuladores de colágeno como Sculptra (PLLA) e Radiesse (hidroxiapatita de cálcio) — agem como biocatalisadores, desencadeando a neocolagênese: a produção natural de colágeno pelo próprio organismo. Diferente dos preenchedores, o resultado é gradual e progressivo, atingindo seu ápice entre 2 e 4 meses após a aplicação. Indicados para laxidão da pele, perda de volume e rejuvenescimento global, com efeito que pode durar de 1,5 a 2 anos.',
       faq: [
         { q: 'Qual a diferença entre bioestimulador e preenchimento?', a: 'O preenchimento repõe volume na hora. O bioestimulador estimula o seu corpo a produzir colágeno aos poucos, focando em firmeza e naturalidade, não em volume imediato.' },        { q: 'Quando aparece o resultado e quanto tempo dura?', a: 'O efeito é gradual: primeiras melhoras em 4 a 8 semanas e resultado pleno em 2 a 4 meses. Pode durar de 1,5 a 2 anos.' },
       ]
@@ -162,10 +162,10 @@ const procedimentos = {
       bg: 'rgba(46,107,110,.05)',
       img: 'assets/images/procedimentos/preenchimento-facial.webp',
       duration: '60 minutos',
-      lead: 'Restauração de volume, definição de contornos e suavização de sulcos com ácido hialurônico de alta performance — resultado imediato, natural e 100% reversível.',
+      lead: 'Restauração de volume, definição de contornos e suavização de sulcos com ácido hialurônico de alta performance resultado imediato, natural e 100% reversível.',
       longDesc: 'O preenchimento com ácido hialurônico (AH) repõe volume, define contornos e suaviza sulcos e rugas com géis biocompatíveis de alta densidade. Trabalhamos com produtos aprovados pela ANVISA e de procedência certificada. Lábios, maçãs do rosto, sulco nasogeniano, mandíbula e bigode chinês são algumas das áreas tratadas. Por ser uma molécula naturalmente presente no organismo, o AH é seguro, e o procedimento é 100% reversível com enzima hialuronidase.',
       faq: [
-        { q: 'O preenchimento com ácido hialurônico é reversível?', a: 'Sim. Se necessário, o produto pode ser dissolvido com a enzima hialuronidase, de forma segura — uma camada extra de segurança do tratamento.' },
+        { q: 'O preenchimento com ácido hialurônico é reversível?', a: 'Sim. Se necessário, o produto pode ser dissolvido com a enzima hialuronidase, de forma segura uma camada extra de segurança do tratamento.' },
         { q: 'O resultado é imediato? Incha muito depois?', a: 'O resultado é imediato e se refina nos dias seguintes. Um leve inchaço nos primeiros dias é comum, sobretudo nos lábios, e passa naturalmente.' },      ]
     },
     {
@@ -187,7 +187,7 @@ const procedimentos = {
       img: 'assets/images/procedimentos/lazer-lavieen.webp',
       duration: '45 minutos',
       lead: 'Tratamento com laser de Thulium fracionado para uniformização da textura da pele, redução de manchas e restauração da luminosidade natural com mínimo downtime.',
-      longDesc: 'O Laser Lavieen utiliza tecnologia de Thulium fracionado para promover fotorrejuvenescimento com precisão e segurança. A emissão fracionada cria microcanais na pele que estimulam a renovação celular e a produção de colágeno, uniformizando a textura, reduzindo manchas solares e sinais de fotoenvelhecimento. Diferente de lasers ablativos mais agressivos, o Lavieen oferece excelente resultado com recuperação mínima — a maioria das pacientes retorna às atividades em 1 a 3 dias.',
+      longDesc: 'O Laser Lavieen utiliza tecnologia de Thulium fracionado para promover fotorrejuvenescimento com precisão e segurança. A emissão fracionada cria microcanais na pele que estimulam a renovação celular e a produção de colágeno, uniformizando a textura, reduzindo manchas solares e sinais de fotoenvelhecimento. Diferente de lasers ablativos mais agressivos, o Lavieen oferece excelente resultado com recuperação mínima a maioria das pacientes retorna às atividades em 1 a 3 dias.',
       faq: [
         { q: 'Preciso ficar muitos dias em recuperação?', a: 'Não. Costuma haver leve vermelhidão e fina descamação por 1 a 3 dias, com retorno rápido à rotina. A fotoproteção no pós é essencial.' },
         { q: 'Para o que o Laser Lavieen é indicado e quantas sessões faço?', a: 'Uniformiza a textura, reduz manchas e devolve luminosidade. Em geral são de 3 a 5 sessões, definidas conforme a sua pele.' },      ]
@@ -213,7 +213,7 @@ const procedimentos = {
       img: 'assets/images/procedimentos/gordura-localizada.webp',
       duration: '60 minutos',
       lead: 'Protocolos injetáveis com enzimas lipolíticas para dissolução de gordura localizada resistente a dieta e exercício, com segurança e eficácia comprovadas.',
-      longDesc: 'O tratamento para gordura localizada utiliza compostos enzimáticos injetáveis que promovem a lipólise (quebra das células de gordura) de forma localizada e controlada. Indicado para papada, flancos, abdômen inferior, culote e região dos joelhos, o protocolo é personalizado conforme a área e o volume a ser tratado. Os resultados são progressivos e os adipócitos destruídos não se regeneram — tornando o resultado definitivo quando aliado a hábitos saudáveis.',
+      longDesc: 'O tratamento para gordura localizada utiliza compostos enzimáticos injetáveis que promovem a lipólise (quebra das células de gordura) de forma localizada e controlada. Indicado para papada, flancos, abdômen inferior, culote e região dos joelhos, o protocolo é personalizado conforme a área e o volume a ser tratado. Os resultados são progressivos e os adipócitos destruídos não se regeneram tornando o resultado definitivo quando aliado a hábitos saudáveis.',
       faq: [
         { q: 'O tratamento injetável substitui a lipoaspiração?', a: 'Não. É indicado para gordura localizada de pequeno a médio volume — não é emagrecimento nem substitui a lipo em grandes volumes.' },
         { q: 'Os resultados são permanentes?', a: 'As células eliminadas não voltam, mas as remanescentes podem crescer com ganho de peso. Manter hábitos saudáveis preserva o resultado.' },      ]
